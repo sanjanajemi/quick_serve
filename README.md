@@ -77,6 +77,7 @@ In your browser, visit: localhost/quick_serve
 
 ## 📁 Project Structure
 quick_serve/ 
+
 ├── app/    # Controllers, Models, Views
 
 ├── config/  # Database and email config 
