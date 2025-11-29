@@ -1,0 +1,263 @@
+:root {
+  --bg-light: #f5f7fa;
+  --bg-dark: #121417;
+  --card-bg-light: #ffffff;
+  --card-bg-dark: #0b141c;
+  --text-light: #09304f;
+  --text-dark: #e0e0e0;
+  --accent-light: #0c2c34;
+  --accent-dark: #818cf8;
+  --danger-light: #0c2c34;
+  --danger-dark: #fd3c3c;
+  --border-light: #d1d5db;
+  --border-dark: #374151;
+}
+
+/* Base */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  margin: 0;
+  padding: 0;
+}
+
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* Header */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent-light);
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+body.dark-mode .main-header {
+  background-color: var(--accent-dark);
+}
+
+.main-header h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 22px;
+}
+
+.header-right {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.header-right .button {
+  padding: 8px 14px;
+  background-color: #4a9fb5;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.header-right .button:hover {
+  background-color: var(--danger-dark);
+  transform: scale(1.05);
+}
+
+/* Main content offset */
+main {
+  padding: 80px 40px 40px; 
+}
+
+/* Headings */
+h2 {
+  color: var(--accent-light);
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: var(--card-bg-light);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode table {
+  background-color: var(--card-bg-dark);
+  border-color: var(--border-dark);
+}
+
+th, td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+}
+
+body.dark-mode th, body.dark-mode td {
+  border-color: var(--border-dark);
+}
+
+th {
+  background-color: var(--accent-light);
+  color: white;
+  font-weight: 500;
+}
+
+td {
+  color: var(--text-light);
+}
+
+body.dark-mode td {
+  color: var(--text-dark);
+}
+
+/* Buttons */
+a.button {
+  display: inline-block;
+  padding: 8px 14px;
+  background-color: #2ba5c3 ;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+a.button:hover {
+  background-color: var(--accent-dark);
+}
+
+/* Back link */
+.back-link {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.back-link a {
+  background-color: var(--accent-light);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.back-link a:hover {
+  background-color: var(--accent-dark);
+}
+
+/* Menu items */
+.item-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  main {
+    padding: 80px 20px 20px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  th, td {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  a.button {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .item-name {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-thumb {
+    width: 40px;
+    height: 40px;
+  }
+
+  h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .back-link {
+    margin-top: 20px;
+  }
+
+  .back-link a {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 80px 10px 10px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  a.button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .header-right {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .header-right .button {
+    width: 100%;
+    text-align: center;
+  }
+}

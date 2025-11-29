@@ -1,0 +1,132 @@
+
+   /* Global Page Styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 30px;
+  background-color: #f0f2f5;
+  margin: 0;
+}
+
+/* Page Title */
+h2 {
+  margin-bottom: 20px;
+  color: #2f3640;
+  font-size: 28px;
+  text-align: center;
+}
+
+/* Top Buttons */
+.button,
+.alt-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  padding: 10px 18px;
+  background-color: #00a8ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+/* Green Button */
+.alt-button {
+  background-color: #4cd137;
+}
+
+/* Blue Button Hover */
+.button:hover {
+  background-color: #0097e6;
+}
+
+/* Green Button Hover */
+.alt-button:hover {
+  background-color: #44bd32;
+}
+
+/* Data Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Table Cells */
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+/* Table Header Styling */
+th {
+  background-color: #dff9fb;
+  color: #2f3640;
+  font-weight: 600;
+}
+
+/* Table Action Links */
+td a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #00a8ff;
+  font-weight: 500;
+}
+
+/* Action Link Hover */
+td a:hover {
+  text-decoration: underline;
+}
+
+/* Empty State Text */
+p {
+  font-size: 16px;
+  color: #888;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  /* Reduce padding */
+  body {
+    padding: 20px;
+  }
+
+  /* Make buttons full width on tablet */
+  .button,
+  .alt-button {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+
+  /* Make table scrollable */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller title */
+  h2 {
+    font-size: 22px;
+  }
+
+  /* Reduce cell padding */
+  th,
+  td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Full-responsive buttons */
+  .button,
+  .alt-button {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+}

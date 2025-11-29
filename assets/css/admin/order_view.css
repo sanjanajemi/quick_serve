@@ -1,0 +1,95 @@
+/* Global Page Styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e2f;
+  color: #f0f0f0;
+  padding: 2em;
+}
+
+/* Page Title */
+h2 {
+  color: #00bcd4;
+}
+
+/* Information Text */
+.info p {
+  margin: 0.5em 0;
+}
+
+/* Data Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #2a2a3d;
+  margin-top: 1em;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table Cells */
+th, td {
+  padding: 1em;
+  border-bottom: 1px solid #444;
+  text-align: left;
+}
+
+/* Table Header */
+th {
+  background-color: #00bcd4;
+  color: #1e1e2f;
+}
+
+/* Back Button */
+.back {
+  display: inline-block;
+  margin-top: 1em;
+  color: #00bcd4;
+  text-decoration: none;
+}
+
+/* Back Button Hover */
+.back:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  /* Reduce body padding */
+  body {
+    padding: 1.2em;
+  }
+
+  /* Make table scrollable */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* Adjust text size */
+  th, td {
+    padding: 0.8em;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller heading */
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Smaller table text */
+  th, td {
+    padding: 0.6em;
+    font-size: 0.85rem;
+  }
+
+  /* Back button full width on mobile */
+  .back {
+    display: block;
+    margin-top: 1.2em;
+    text-align: center;
+  }
+}
+

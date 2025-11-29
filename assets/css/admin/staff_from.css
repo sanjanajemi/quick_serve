@@ -1,0 +1,103 @@
+
+    /* Global Page Styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f6fa;
+  padding: 40px 20px;
+  margin: 0;
+}
+
+/* Page Title */
+h2 {
+  text-align: center;
+  color: #2f3640;
+  margin-bottom: 30px;
+}
+
+/* Staff Form Container */
+form.staff-form {
+  background-color: #fff;
+  padding: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Form Inputs & Dropdowns */
+.staff-form input,
+.staff-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Submit Button */
+.staff-form button {
+  margin-top: 25px;
+  padding: 12px 20px;
+  background-color: #00a8ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Submit Button Hover */
+.staff-form button:hover {
+  background-color: #0090cc;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  /* Reduce page padding */
+  body {
+    padding: 30px 15px;
+  }
+
+  /* Adjust form padding */
+  form.staff-form {
+    padding: 25px;
+  }
+
+  /* Adjust inputs */
+  .staff-form input,
+  .staff-form select {
+    font-size: 0.95rem;
+    padding: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller page padding */
+  body {
+    padding: 20px 10px;
+  }
+
+  /* Smaller title */
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Mobile form adjustments */
+  form.staff-form {
+    padding: 20px;
+  }
+
+  /* Inputs on small devices */
+  .staff-form input,
+  .staff-form select {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  /* Full-width submit button */
+  .staff-form button {
+    width: 100%;
+    padding: 12px;
+  }
+}

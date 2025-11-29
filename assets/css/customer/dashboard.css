@@ -1,0 +1,417 @@
+/* --------------------------------------------------------
+   HERO SECTION
+--------------------------------------------------------- */
+.hero-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('/quick_serve/assets/images/customer/hero1.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.75);
+  z-index: -3;
+}
+
+.hero-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(0,60,90,0.65), rgba(0,90,70,0.65));
+  backdrop-filter: blur(4px);
+  z-index: -2;
+}
+
+.hero-content {
+  text-align: center;
+  margin-top: 150px;
+  color: white;
+}
+
+.hero-title {
+  font-size: 52px;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+.cta-btn {
+  margin-top: 90px;
+  padding: 18px 40px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(90deg, #1a73e8, #0abf66);
+  box-shadow: 0px 8px 24px rgba(0,0,0,0.3);
+  transition: 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 12px 32px rgba(0,0,0,0.4);
+}
+
+/* --------------------------------------------------------
+   DEALS SECTION
+--------------------------------------------------------- */
+.deals-section {
+  margin: 60px auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deals-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
+}
+
+.deal-grid {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.deal-card {
+  width: 280px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  padding: 18px;
+  transition: 0.25s;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0px 6px 18px rgba(0,0,0,0.25);
+}
+
+.deal-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0px 10px 28px rgba(0,0,0,0.35);
+}
+
+.deal-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.deal-card-title {
+  font-weight: 700;
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.deal-card-desc {
+  opacity: 0.9;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* --------------------------------------------------------
+   DROPDOWN MENU (Our Menu)
+--------------------------------------------------------- */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  /* Unified with nav-btn */
+  background: rgba(255,255,255,0.15);
+  padding: 16px 28px;
+  border-radius: 12px;
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.dropbtn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background: rgba(255,255,255,0.95);
+  min-width: 200px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.25);
+  border-radius: 8px;
+  z-index: 30;
+}
+
+.dropdown-content a {
+  color: #0c3554;
+  padding: 14px 18px;
+  text-decoration: none;
+  display: block;
+  font-weight: 600;
+}
+
+.dropdown-content a:hover {
+  background: rgba(26,115,232,0.15);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+/* --------------------------------------------------------
+   TRACK ORDER — PAGE CONTENT POSITION FIX
+--------------------------------------------------------- */
+
+.page-content {
+    margin-top: 40px !important;   /* move tracking content UP */
+    padding-bottom: 60px;
+}
+
+/* When tracking is active, reduce spacing from other sections */
+body.tracking-active #deals-section {
+    margin-top: 20px !important;
+}
+
+/* Tracking box styling */
+.tracking-box {
+    background: rgba(255,255,255,0.95);
+    padding: 25px;
+    border-radius: 14px;
+    max-width: 600px;
+    margin: 30px auto;
+    text-align: left;
+    color: #000;
+    box-shadow: 0px 6px 24px rgba(0,0,0,0.25);
+    animation: fadeIn 0.3s ease;
+}
+
+/* subtle fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+body.blurred {
+    filter: blur(4px);
+    pointer-events: none;
+}
+.delete-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+}
+/* ============================
+   DELETE ACCOUNT POPUP STYLING
+===============================*/
+
+.delete-modal {
+    position: fixed;
+    inset: 0;
+    display: none; /* shown with JS */
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+}
+
+.delete-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 32px;
+    width: 420px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+    animation: fadeIn 0.25s ease-out;
+}
+
+.delete-box h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.delete-box p {
+    color: #444;
+    font-size: 15px;
+}
+
+.timer {
+    font-size: 34px;
+    margin: 18px 0;
+    font-weight: 700;
+    color: #d32f2f;
+}
+
+.danger-btn {
+    background: #d32f2f;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.danger-btn:hover {
+    background: #b71c1c;
+}
+
+.cancel-btn {
+    background: #555;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 12px;
+    transition: 0.2s ease;
+}
+
+.cancel-btn:hover {
+    background: #444;
+}
+
+/* Background blur */
+.blur-background {
+    filter: blur(4px);
+}
+
+
+/* Smooth fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* --------------------------------------------------------
+   TOPBAR LOGO
+--------------------------------------------------------- */
+.topbar-logo {
+    height: 48px;        /* adjust size */
+    width: auto;
+    margin-right: 20px;  /* adds spacing before menu button */
+}
+.dashboard-cart {
+    position: absolute;
+    top: 80px;       /* Adjust until perfect */
+    right: 40px;     /* Align under avatar */
+    background: white;
+    color: #007bff;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.20);
+    z-index: 1500;
+    transition: transform 0.2s ease, background 0.2s;
+}
+
+/* Move dashboard cart icon slightly down */
+.topbar .cart-icon {
+    margin-top: 10px;
+}
+
+.dashboard-cart:hover {
+    transform: scale(1.07);
+    background: #f0f8ff;
+}
+/* ==========================================
+   DASHBOARD CART DRAWER (matches menu_item)
+=========================================== */
+
+/* Drawer container */
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 100vh;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+/* Drawer sliding panel */
+.cart-panel {
+    position: absolute;
+    top: 0;
+    right: -380px;
+    width: 380px;
+    height: 100%;
+    background: #fff;
+    padding: 20px;
+    box-shadow: -4px 0 14px rgba(0,0,0,0.25);
+    overflow-y: auto;
+    transition: right 0.3s ease;
+}
+
+/* Dark background overlay */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    z-index: 1500;
+}
+
+/* When drawer is open */
+.cart-drawer.open .cart-panel {
+    right: 0;
+}
+
+.cart-overlay.open {
+    display: block;
+}
+
+/* Footer + Buttons */
+.cart-footer {
+    margin-top: 20px;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.continue-btn {
+    width: 100%;
+    background: #ddd;
+    color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.checkout-btn {
+    width: 100%;
+    background: #4CAF50;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 10px;
+}

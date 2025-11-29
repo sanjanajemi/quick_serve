@@ -1,0 +1,27 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Base directory (uncomment if deployed in a subfolder)
+# RewriteBase /quick_serve/
+
+# Allow access to existing files and directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirect all other requests to index.php
+RewriteRule ^ index.php [QSA,L]
+
+#  Security: Block access to sensitive files
+<FilesMatch "\.(env|htaccess|git|sql|bak|ini)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+
+#  Prevent directory listing
+Options -Indexes
+
+#  Optional: Force HTTPS (uncomment if SSL is active)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

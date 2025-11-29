@@ -1,0 +1,116 @@
+/* Global Page Styling */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Page Title */
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form Container */
+form {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+/* Input Focus Effect */
+input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Submit Button */
+button {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button Hover */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  /* Reduce page padding */
+  body {
+    padding: 25px;
+  }
+
+  /* Adjust form spacing */
+  form {
+    padding: 25px 30px;
+  }
+
+  /* Adjust input size */
+  input,
+  select {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller page padding */
+  body {
+    padding: 20px;
+  }
+
+  /* Smaller title */
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Adjust form padding */
+  form {
+    padding: 20px;
+  }
+
+  /* Mobile input fields */
+  input,
+  select {
+    font-size: 14px;
+    padding: 9px;
+  }
+
+  /* Full-width button */
+  button {
+    width: 100%;
+    padding: 12px;
+  }
+}

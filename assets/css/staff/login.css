@@ -1,0 +1,132 @@
+:root {
+  --bg-light: #f5f7fa;
+  --bg-dark: #121417;
+  --card-bg-light: #ffffff;
+  --card-bg-dark: #0b141c;
+  --text-light: #09304f;
+  --text-dark: #e0e0e0;
+  --accent-light: #0c2c34;
+  --accent-dark: #818cf8;
+  --danger-light: #0c2c34;
+  --danger-dark: #fd3c3c;
+  --border-light: #d1d5db;
+  --border-dark: #374151;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-dark));
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  animation: fadeInBody 1s ease-in-out;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color:  #599dae;;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
+/* Position at top-left outside the card */
+.btn.top-left {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+main {
+  background-color: var(--card-bg-light);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeSlideUp 0.8s ease-out forwards;
+}
+
+h2 {
+  color: var(--accent-light);
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 1rem;
+  color: var(--text-light);
+  background-color: var(--bg-light);
+}
+
+input::placeholder {
+  color: var(--border-dark);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--accent-light);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--accent-dark);
+}
+
+.error {
+  color: var(--danger-dark);
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+a {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--accent-light);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInBody {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

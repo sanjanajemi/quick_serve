@@ -1,0 +1,102 @@
+/* Global Page Styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f6fa;
+  padding: 40px 20px;
+  margin: 0;
+}
+
+/* Profile Container Box */
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Page Title */
+h2 {
+  text-align: center;
+  color: #2f3640;
+  margin-bottom: 20px;
+}
+
+/* Profile Text */
+p {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #333;
+}
+
+/* Profile Image */
+img {
+  display: block;
+  margin: 15px auto;
+  max-width: 150px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Back Link */
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 30px;
+  text-decoration: none;
+  color: #00a8ff;
+  font-weight: bold;
+}
+
+/* Back Link Hover */
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  /* Adjust page padding */
+  body {
+    padding: 30px 15px;
+  }
+
+  /* Adjust container padding */
+  .profile-container {
+    padding: 25px;
+  }
+
+  /* Adjust image size */
+  img {
+    max-width: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Reduce page padding */
+  body {
+    padding: 20px 10px;
+  }
+
+  /* Smaller title */
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Smaller container padding */
+  .profile-container {
+    padding: 20px;
+  }
+
+  /* Mobile image size */
+  img {
+    max-width: 120px;
+  }
+
+  /* Text resizing */
+  p {
+    font-size: 0.95rem;
+  }
+}
+
+  

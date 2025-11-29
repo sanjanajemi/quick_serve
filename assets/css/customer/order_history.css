@@ -1,0 +1,146 @@
+/* -------------------------------------------------------------
+   GLOBAL BACKGROUND (same as dashboard)
+-------------------------------------------------------------- */
+.hero-bg {
+    position: fixed;
+    inset: 0;
+    background-image: url("/quick_serve/assets/images/customer/hero1.png");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.75);
+    z-index: -3;
+}
+
+.hero-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom right, rgba(0,60,90,0.65), rgba(0,90,70,0.65));
+    backdrop-filter: blur(4px);
+    z-index: -2;
+}
+
+/* -------------------------------------------------------------
+   PAGE CONTAINER
+-------------------------------------------------------------- */
+.order-history-container {
+    max-width: 900px;
+    margin: 140px auto 60px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+/* Title */
+.order-history-title {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* -------------------------------------------------------------
+   ORDER LIST
+-------------------------------------------------------------- */
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.order-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    padding: 18px 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.25);
+    transition: 0.25s ease;
+    text-align: left;
+}
+
+.order-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.35);
+}
+
+.order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.order-status {
+    font-size: 14px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.order-items {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.order-items li {
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+/* Receipt Link */
+.receipt-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #00ffcc;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.receipt-link:hover {
+    text-decoration: underline;
+}
+
+/* -------------------------------------------------------------
+   STATUS COLORS
+-------------------------------------------------------------- */
+
+.status-pending { background: #fff3cd; color: #856404; }
+.status-preparing { background: #cce5ff; color: #004085; }
+.status-ready { background: #d4edda; color: #155724; }
+.status-completed { background: #e2e3e5; color: #383d41; }
+.status-cancelled { background: #f8d7da; color: #721c24; }
+
+/* -------------------------------------------------------------
+   RESPONSIVE FIX
+-------------------------------------------------------------- */
+@media (max-width: 600px) {
+
+    .order-history-title {
+        font-size: 30px;
+    }
+
+    .order-card {
+        padding: 15px 16px;
+    }
+
+    .order-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}.order-card-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.no-orders-text {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-top: 20px;
+}
+

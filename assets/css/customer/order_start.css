@@ -1,0 +1,105 @@
+/* Full page hero background (same style as menu & cart) */
+.global-bg {
+    background: url("/quick_serve/assets/images/customer/hero1.png") center/cover no-repeat fixed;
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+}
+
+.global-bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -1;
+}
+
+/* Page title */
+.checkout-title {
+    text-align: left;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 40px 0 10px 0;
+    color: white;
+    width: 100%;
+    padding-left: 80px;
+}
+
+/* Blue gradient bar */
+.checkout-header {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(to right, #0178ff, #02cf7c);
+    display: flex;
+    align-items: flex-end;
+    padding-left: 80px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* MAIN WRAPPER */
+.checkout-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 14px;
+    box-shadow: 0px 8px 22px rgba(0,0,0,0.15);
+}
+
+/* Item list styling */
+.order-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item strong {
+    font-size: 18px;
+}
+
+.order-sub {
+    color: #555;
+    font-size: 14px;
+}
+
+/* Total */
+.order-total {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* Comments box */
+textarea.order-comment {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    resize: none;
+    margin-top: 10px;
+}
+
+/* Confirm button */
+.confirm-btn {
+    display: inline-block;
+    background: #0a66ff;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+    transition: 0.25s;
+}
+
+.confirm-btn:hover {
+    background: #004fcc;
+}

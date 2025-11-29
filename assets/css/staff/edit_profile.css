@@ -1,0 +1,214 @@
+:root {
+  --bg-light: #f5f7fa;
+  --card-bg-light: #ffffff;
+  --text-light: #09304f;
+  --accent-light: #03243f;   
+  --accent-dark: #478497;
+  --danger-dark: #fd3c3c;
+  --border-light: #d1d5db;
+  --success: #bd9efb;
+}
+
+/* Base Layout */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--accent-light);
+  color: var(--text-light);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Top Navigation */
+.top-nav {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  background-color: var(--accent-light);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: var(--success); 
+  transform: scale(1.05);
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Card Container */
+.edit-profile-card {
+  background-color: var(--card-bg-light);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.edit-profile-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: var(--accent-light);
+  text-align: center;
+}
+
+/* Form Elements */
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"],
+select {
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+input:focus, select:focus {
+  border-color: var(--accent-dark);
+  outline: none;
+}
+
+/* Profile Image */
+.profile-img {
+  display: block;             
+  margin: 15px auto;         
+  max-width: 150px;          
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background-color: var(--accent-dark);
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: var(--success); 
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  background-color: var(--danger-dark);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.card-footer {
+  margin-top: 25px;
+  text-align: center;
+  border-top: 1px solid var(--border-light);
+  padding-top: 15px;
+}
+
+.footer-btn {
+  background-color: var(--accent-dark);
+  color: #ecf4f8;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-btn:hover {
+  background-color: var(--success);
+  transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+  .footer-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+  }
+}
+/* Responsive Rules */
+@media (max-width: 768px) {
+  .edit-profile-card {
+    padding: 20px;
+    max-width: 95%;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .profile-img {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .edit-profile-card {
+    padding: 15px;
+  }
+
+  .edit-profile-card h2 {
+    font-size: 20px;
+  }
+
+  input, select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .profile-img {
+    max-width: 100px;
+  }
+}

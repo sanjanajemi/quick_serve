@@ -1,0 +1,149 @@
+/* Global Page Styling */
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+  margin: 0;
+}
+
+/* Page Heading */
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+
+/* Dashboard Button */
+.dashboard-button {
+  display: inline-block;
+  background: #00bcd4;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.dashboard-button:hover {
+  background: #0097a7;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Table Cells */
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+/* Table Header */
+th {
+  background-color: #3498db;
+  color: white;
+}
+
+/* Row Hover Effect */
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Action Buttons Container */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Edit/Delete Buttons */
+.actions a,
+.actions form button {
+  background: none;
+  border: none;
+  color: #3498db;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+/* Edit Button Hover */
+.actions a:hover,
+.actions form button:hover {
+  color: #1d6fa5;
+}
+
+/* Delete Button */
+.actions form button {
+  background: #e74c3c;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+/* Delete Button Hover */
+.actions form button:hover {
+  background: #c0392b;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  /* Reduce body padding */
+  body {
+    padding: 15px;
+  }
+
+  /* Buttons full width on tablet */
+  .dashboard-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Table scrollable on smaller screens */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller heading */
+  h2 {
+    font-size: 20px;
+  }
+
+  /* Smaller table cells */
+  th,
+  td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  /* Responsive action buttons */
+  .actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+   .actions form button,
+  .actions a {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+}

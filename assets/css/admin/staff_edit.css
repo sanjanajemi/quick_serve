@@ -1,0 +1,204 @@
+/* Base layout */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa; /* light background */
+  color: #09304f;            /* deep slate text */
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Top navigation */
+.top-nav {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #478497;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #bd9efb;
+  transform: scale(1.05);
+}
+
+/* Card container */
+.edit-profile-card {
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Heading */
+.edit-profile-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #478497;
+  text-align: center;
+}
+
+/* Form labels */
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
+
+/* Form inputs */
+input[type="text"],
+input[type="email"],
+input[type="file"],
+select {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+input:focus,
+select:focus {
+  border-color: #478497;
+  outline: none;
+}
+
+/* Profile image preview */
+.profile-img {
+  display: block;
+  margin: 15px auto;
+  max-width: 150px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #478497;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #bd9efb;
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  background-color: #fd3c3c;
+}
+
+/* Button layout */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Footer button */
+.card-footer {
+  margin-top: 25px;
+  text-align: center;
+  border-top: 1px solid #d1d5db;
+  padding-top: 15px;
+}
+
+.footer-btn {
+  background-color: #478497;
+  color: #ecf4f8;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-btn:hover {
+  background-color: #bd9efb;
+  transform: scale(1.05);
+}
+
+/* Tablet responsiveness */
+@media (max-width: 768px) {
+  .edit-profile-card {
+    padding: 20px;
+    max-width: 95%;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .profile-img {
+    max-width: 120px;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .edit-profile-card {
+    padding: 15px;
+  }
+
+  .edit-profile-card h2 {
+    font-size: 20px;
+  }
+
+  input, select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .profile-img {
+    max-width: 100px;
+  }
+
+  .footer-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+  }
+}

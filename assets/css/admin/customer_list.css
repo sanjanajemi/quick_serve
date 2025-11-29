@@ -1,0 +1,100 @@
+/* Base layout */
+body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  background-color: #f9f9f9;
+}
+
+/* Page heading */
+h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Top bar container (dashboard button, filters, etc.) */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* allows wrapping on small screens */
+}
+
+/* Dashboard button */
+.dashboard-button {
+  padding: 10px 16px;
+  background-color: #2ecc71;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.dashboard-button:hover {
+  background-color: #27ae60;
+}
+
+/* DataTable styles */
+table.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.dataTable th,
+table.dataTable td {
+  padding: 10px;
+  text-align: left;
+}
+
+table.dataTable th {
+  background-color: #eee;
+}
+
+/* View link inside table */
+a.view-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a.view-link:hover {
+  text-decoration: underline;
+}
+
+
+/* Responsive Adjustments */
+
+
+@media (max-width: 768px) {
+  /* Reduce global margin on tablets */
+  body {
+    margin: 20px;
+  }
+
+  /* Stack top-bar items and center them */
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .dashboard-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  /* Make table text easier to read on small screens */
+  table.dataTable th,
+  table.dataTable td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  /* Make the view links easier to tap */
+  a.view-link {
+    display: inline-block;
+    padding: 4px 0;
+  }
+}

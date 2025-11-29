@@ -1,0 +1,126 @@
+/* Base page layout */
+body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  background-color: #f9f9f9;
+}
+
+/* Page headings */
+h2, h3 {
+  color: #333;
+}
+
+/* Details table container */
+table.details {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+/* Details table cells */
+table.details th,
+table.details td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Header column styling */
+table.details th {
+  background-color: #f0f0f0;
+  width: 150px;
+}
+
+/* Action button container */
+.actions {
+  margin-bottom: 30px;
+}
+
+/* Action buttons: Edit/Delete */
+.actions a {
+  display: inline-block;
+  margin-right: 15px;
+  padding: 8px 14px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.actions a.delete {
+  background-color: #dc3545;
+}
+
+.actions a:hover {
+  opacity: 0.9;
+}
+
+/* Back button link */
+a.back-link {
+  display: inline-block;
+  margin-top: 30px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+a.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Optional data table styling */
+table.dataTable {
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+/* Responsive Adjustments */
+
+@media (max-width: 768px) {
+  /* Reduce overall spacing on medium screens */
+  body {
+    margin: 20px;
+  }
+
+  /* Make details table full-width and readable */
+  table.details th,
+  table.details td {
+    padding: 10px;
+  }
+
+  /* Make action buttons stack better */
+  .actions a {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 520px) {
+  /* Make label column smaller on very small screens */
+  table.details th {
+    width: 100px;
+    font-size: 14px;
+  }
+
+  table.details td {
+    font-size: 14px;
+  }
+
+  /* Action buttons full-width for easier tapping */
+  .actions a {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+  /* Back link easier to tap */
+  a.back-link {
+    font-size: 14px;
+  }
+}
+
+ 

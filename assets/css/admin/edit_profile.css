@@ -1,0 +1,134 @@
+ /* Page base layout */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e2f;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+}
+
+/* Main form card */
+.form-card {
+  background-color: #2a2a3d;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,188,212,0.2);
+  max-width: 480px;
+  width: 100%;
+}
+
+/* Form title */
+.form-card h2 {
+  margin-bottom: 1em;
+  color: #00bcd4;
+  text-align: center;
+}
+
+/* Form field labels */
+form label {
+  display: block;
+  margin-top: 1em;
+  font-weight: bold;
+  color: #ccc;
+}
+
+/* Input fields */
+form input[type="text"],
+form input[type="email"] {
+  width: 100%;
+  padding: 0.6em;
+  margin-top: 0.3em;
+  border-radius: 6px;
+  border: none;
+  background-color: #3a3a4f;
+  color: #f0f0f0;
+}
+
+/* Button container */
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
+/* Buttons */
+.btn {
+  background-color: #0097a7;
+  color: white;
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #00bcd4;
+  color: #1e1e2f;
+}
+
+/* Gray cancel button */
+.btn.gray {
+  background-color: #7f8c8d;
+}
+
+/* Back button */
+.back-button {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.back-button a {
+  background-color: #7f8c8d;
+  color: white;
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.back-button a:hover {
+  background-color: #00bcd4;
+  color: #1e1e2f;
+}
+
+
+
+/* Responsive layout adjustments */
+
+
+@media (max-width: 600px) {
+
+  /* Reduce page padding */
+  body {
+    padding: 1.5em;
+  }
+
+  /* Form card spacing for small screens */
+  .form-card {
+    padding: 1.5em;
+  }
+
+  /* Stack buttons vertically */
+  .btn-group {
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Back button full-width */
+  .back-button a {
+    display: block;
+    width: 100%;
+  }
+}

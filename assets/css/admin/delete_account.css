@@ -1,0 +1,101 @@
+/* Page base layout */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Delete confirmation card */
+.delete-card {
+  background-color: #1e1e1e;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  max-width: 500px;
+  text-align: center;
+}
+
+/* Card title */
+.delete-card h2 {
+  color: #ff5252;
+  margin-bottom: 20px;
+}
+
+/* Card text */
+.delete-card p {
+  font-size: 1.1em;
+  margin-bottom: 25px;
+}
+
+/* Countdown timer highlight */
+#timer {
+  font-weight: bold;
+  color: #00bcd4;
+  font-size: 1.3em;
+}
+
+/* Form spacing */
+form {
+  margin-top: 10px;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Cancel button */
+.btn.cancel {
+  background-color: #ff9800;
+  color: white;
+}
+
+.btn.cancel:hover {
+  background-color: #e68900;
+}
+
+
+/* Responsive layout adjustments */
+
+
+@media (max-width: 600px) {
+
+  /* Reduce global padding for small screens */
+  body {
+    padding: 20px;
+    height: auto;
+    align-items: flex-start;
+  }
+
+  /* Make the delete card more compact */
+  .delete-card {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .delete-card p {
+    font-size: 1em;
+  }
+
+  #timer {
+    font-size: 1.1em;
+  }
+
+  /* Buttons full width for easier tapping */
+  .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+  }
+}

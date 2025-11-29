@@ -1,0 +1,256 @@
+:root {
+  --bg-light: #f5f7fa;
+  --bg-dark: #031736;
+  --card-bg-light: #ffffff;
+  --card-bg-dark: #091d2f;
+  --text-light: #09304f;
+  --text-dark: #e0e0e0;
+  --accent-light: #03243f;
+  --accent-dark: #478497;
+  --danger-dark: #fd3c3c;
+  --border-light: #d1d5db;
+  --border-dark: #374151;
+}
+
+/*  Base  */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  margin: 0;
+  padding: 0;
+}
+
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* Header  */
+header {
+  background-color: var(--accent-light);
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+body.dark-mode header {
+  background-color: var(--accent-dark);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+nav .btn {
+  background-color: var(--accent-dark);
+  color: #fff;
+  padding: 8px 14px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+nav .btn:hover {
+  background-color: var(--danger-dark);
+}
+
+/* Toggle Button */
+.toggle-btn {
+  background-color: var(--accent-dark);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background-color: var(--danger-dark);
+  transform: scale(1.05);
+}
+
+body.dark-mode .toggle-btn {
+  background-color: var(--accent-light);
+  color: var(--text-dark);
+}
+
+/* Main  */
+main {
+  padding: 30px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-bg-light);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+body.dark-mode table {
+  background-color: var(--card-bg-dark);
+}
+
+th, td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+body.dark-mode th, body.dark-mode td {
+  border-color: var(--border-dark);
+}
+
+th {
+  background-color: var(--accent-light);
+  color: #fff;
+  font-weight: bold;
+}
+
+body.dark-mode th {
+  background-color: var(--accent-dark);
+}
+
+tr:hover {
+  background-color: #f1f5f9;
+}
+
+body.dark-mode tr:hover {
+  background-color: #1e2e3e;
+}
+
+/*  Actions Column */
+.order-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.order-actions .btn {
+  display: block;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* View Details Button  */
+.order-actions .btn.view-details {
+  background-color: var(--accent-light);
+  color: #fff;
+}
+
+.order-actions .btn.view-details:hover {
+  background-color: var(--accent-dark);
+  transform: scale(1.05);
+}
+
+/* Restore Button  */
+.order-actions .btn.restore {
+  background-color: #aa8912 ;
+  color: #fff;
+}
+
+.order-actions .btn.restore:hover {
+  background-color: var(--accent-dark);
+  transform: scale(1.05);
+}
+
+/*  Responsive Table  */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    border: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  td::before {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: bold;
+    color: var(--text-light);
+    content: attr(data-label);
+  }
+
+  body.dark-mode td::before {
+    color: var(--text-dark);
+  }
+
+  .order-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*  Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #666;
+  border-top: 1px solid var(--border-light);
+  margin-top: 40px;
+}
+
+body.dark-mode footer {
+  color: #aaa;
+  border-top-color: var(--border-dark);
+}
+
+.toast {
+  display: block;
+  margin: 20px auto;           
+  background-color: var(--accent-dark);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  text-align: center;
+  max-width: 600px;            
+}
+.toast.show {
+  opacity: 1;
+}
+.success-banner {
+  background-color: #e0f7e9;
+  color: #2e7d32;
+  padding: 12px 20px;
+  margin: 20px 0;
+  border: 1px solid #b2dfdb;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+}

@@ -1,0 +1,109 @@
+/* Global Page Styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 40px;
+}
+
+/* Profile Card */
+.profile-card {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Page Title */
+.profile-card h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Profile Image Container */
+.profile-image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Profile Picture */
+.profile-pic {
+  max-width: 120px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Profile Details List */
+.profile-details {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+/* Profile Detail Item */
+.profile-details li {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Buttons Wrapper */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Buttons */
+.btn {
+  text-align: center;
+  padding: 10px;
+  background-color: #00a8ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* Button Hover Effect */
+.btn:hover {
+  background-color: #0090cc;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Form Input Fields */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Form Submit Button */
+form button {
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* F*

@@ -1,0 +1,58 @@
+.hero-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('/quick_serve/assets/images/customer/hero1.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.7);
+  z-index: -3;
+}
+
+.hero-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: -2;
+}
+
+.deal-container {
+  margin: 130px auto;
+  width: 420px;
+  padding: 25px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  text-align: center;
+  color: white;
+}
+
+.deal-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.coffee-select {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0 20px;
+  border-radius: 10px;
+  border: none;
+  font-size: 17px;
+}
+
+.deal-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background: #0abf66;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.deal-btn:hover {
+  opacity: 0.9;
+}

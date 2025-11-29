@@ -1,0 +1,211 @@
+   /* Page layout */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e2f;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+}
+
+/* User profile card */
+.profile-card {
+  background-color: #2a2a3d;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,188,212,0.2);
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-card h2 {
+  margin-bottom: 1em;
+  color: #00bcd4;
+  font-size: 1.8em;
+}
+
+/* Info section box */
+.info-block {
+  background-color: #3a3a4f;
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 1.5em;
+  text-align: left;
+}
+
+.info-block p {
+  margin: 0.5em 0;
+  font-size: 1.1em;
+}
+
+.info-block strong {
+  color: #ccc;
+  display: inline-block;
+  width: 100px;
+}
+
+/* Status label */
+.status-badge {
+  display: inline-block;
+  background-color: #0097a7;
+  color: white;
+  padding: 0.3em 0.8em;
+  border-radius: 20px;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
+
+/* Action buttons layout */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+/* Buttons */
+.btn {
+  background-color: #0097a7;
+  color: white;
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #00bcd4;
+  color: #1e1e2f;
+}
+
+.btn.red { background-color: #e74c3c; }
+.btn.gray { background-color: #7f8c8d; }
+.btn.teal { background-color: #00897b; }
+
+/* Back button */
+.back-button {
+  margin-top: 2em;
+}
+
+.back-button a {
+  background-color: #7f8c8d;
+  color: white;
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.back-button a:hover {
+  background-color: #00bcd4;
+  color: #1e1e2f;
+}
+
+/* Admin creation form container */
+.admin-create-wrapper {
+  background-color: #2a2a3d;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,188,212,0.2);
+  max-width: 480px;
+  width: 100%;
+  margin-top: 2em;
+}
+
+.admin-create-wrapper label {
+  display: block;
+  margin-top: 1em;
+  color: #ccc;
+  font-weight: bold;
+}
+
+.admin-create-wrapper input {
+  width: 100%;
+  padding: 0.6em;
+  margin-top: 0.3em;
+  border-radius: 6px;
+  border: none;
+  background-color: #3a3a4f;
+  color: #f0f0f0;
+}
+
+/* Success message */
+.success-box {
+  background-color: #2e7d32;
+  color: white;
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+/* Light mode overrides */
+.light-mode {
+  background-color: #f0f0f0;
+  color: #1e1e2f;
+}
+
+.light-mode .profile-card,
+.light-mode .admin-create-wrapper {
+  background-color: #ffffff;
+  color: #1e1e2f;
+}
+
+.light-mode .info-block {
+  background-color: #e0e0e0;
+}
+
+.light-mode .btn:hover {
+  background-color: #0097a7;
+  color: white;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+
+  /* Reduce overall padding */
+  body {
+    padding: 1em;
+  }
+
+  /* Reduce card padding */
+  .profile-card,
+  .admin-create-wrapper {
+    padding: 1.4em;
+  }
+
+  /* Reduce title size */
+  .profile-card h2 {
+    font-size: 1.5em;
+  }
+
+  .info-block p {
+    font-size: 1em;
+  }
+
+  /* Buttons scale better */
+  .btn {
+    font-size: 0.95rem;
+    padding: 0.55em 1em;
+  }
+
+  .back-button a {
+    font-size: 0.95rem;
+    padding: 0.55em 1em;
+  }
+
+  /* Make strong labels auto-width on very small devices */
+  .info-block strong {
+    width: auto;
+    display: block;
+    margin-bottom: 0.2em;
+  }
+}

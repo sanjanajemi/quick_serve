@@ -1,0 +1,69 @@
+/* --------------------------------------------------------
+   MENU PAGE STYLE (Fresh, Clean, Working)
+--------------------------------------------------------- */
+
+/* Container holding all cards */
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding-bottom: 60px;
+}
+
+/* Each menu card */
+.menu-card {
+    width: 260px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+/* FIXED IMAGE SIZE */
+.menu-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+
+/* Title */
+.menu-card h3 {
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #003d66;
+}
+
+/* Text */
+.menu-card p {
+    font-size: 14px;
+    margin: 6px 0;
+    color: #444;
+}
+
+/* Button */
+.btn {
+    margin-top: 10px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #1a73e8, #0abf66);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    transition: 0.25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
