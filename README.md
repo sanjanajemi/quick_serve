@@ -21,6 +21,7 @@ This project was designed to simulate a real-world restaurant workflow with
 - Passwords stored with `password_hash()` and verified with `password_verify()`
 - CSRF tokens for form submissions
 - `htmlspecialchars()` for XSS prevention
+- Front end + back end validation and sanitization.
 - Session-required page access
 
 ###  Customer Features
@@ -45,15 +46,16 @@ This project was designed to simulate a real-world restaurant workflow with
 
 ###  Admin Features
 - Secure login with admin credentials.
-- Manage menus, staff accounts, and customer list.
+- Manage admin account.
+- Manage staff accounts, customer list and manage menu
 - Create new admin and manage account.
-- Hide/Show menu items dynamically
-- Access full customer order history
+- Hide/Show menu items dynamically to cutomers.
+- Access full customer order history.
 - View restaurant order analytics and revenue calculation.
 
 ###  Email Notifications for ready orders and cancelled orders.
-- Branded, styled templates with background colors
 - Automated flow triggered when orders are marked ready and pressed 'Send email' button.
+- Auto cancellation mail sending feature when orders are cancelled by staff.
 
 
 ##  Project Setup
@@ -70,23 +72,24 @@ This project was designed to simulate a real-world restaurant workflow with
 4. **Import SQL**  
 Import the SQL file located at project root:'brock_cafe.sql'
 
-
 5. **Run the Project**  
 In your browser, visit: localhost/quick_serve
 
 ## 📁 Project Structure
-restaurant_management_system/ 
+quick_serve/ 
 ├── app/    # Controllers, Models, Views
 
-├── config/  # Database and email config
+├── config/  # Database and email config 
 
-├── database/  # SQL dump 
-
-├── public/    # Assets (CSS, JS, images) 
+├── assets/    # (CSS, JS, images) 
 
 ├── storage/    # Logs and uploads
 
-├── index.php    # Entry point and 
+├── libs/ PhpMailer
+
+├── bootstrap.php
+
+├── index.php    # Entry point
 
 └── README.md     # Setup and documentation
 
@@ -97,14 +100,14 @@ restaurant_management_system/
 - Responsive design for desktop, tablet, and kitchen displays
 - Color-coded order statuses and order cards (Not set, Received, Preparing, Ready)
 - Accessible forms and navigation
-- Dark mode and high-contrast options
+- Dark mode options.
 
 
 
 ##  Team Contributions
 
 - **Tirsana** –Customer Interface Developer  
--**Sanjana** – System Designer & Staff Interface Developer (Scrum master) 
+- **Sanjana** – System Designer & Staff Interface Developer (Scrum master) 
 - **Nusrat** – Admin Interface Developer
 
 
