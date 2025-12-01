@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php"
-         colors="true"
-         verbose="true"
-         log-junit="tests/logs/junit.xml"
-         testdox-html="tests/logs/testdox.html">
+         colors="true">
+
+    <logging>
+        <junit outputFile="tests/logs/junit.xml"/>
+        <testdoxHtml outputFile="tests/logs/testdox.html"/>
+    </logging>
+
     <testsuites>
         <testsuite name="QuickServe Test Suite">
             <directory>tests</directory>

@@ -75,16 +75,25 @@ Import the SQL file located at project root:'brock_cafe.sql'
 5. **Run the Project**  
 In your browser, visit: localhost/quick_serve
 
-## 📁 Project Structure
+## System design:
+
+(Single entry point based system design)
+
 quick_serve/ 
 
-├── app/    # Controllers, Models, Views
+├── app/       # controllers, models, views, core and helpers
 
-├── config/  # Database and email config 
+├── assets/    # css, images, js and sounds
 
-├── assets/    # (CSS, JS, images) 
+├── config/    # autoload, config, db, email and routes
 
-├── storage/    # Logs and uploads
+├── storage/    # logs and uploads
+
+├── tests/       # logs and tests
+
+├── .env
+
+├── .htaccess
 
 ├── libs/ PhpMailer
 
@@ -93,7 +102,6 @@ quick_serve/
 ├── index.php    # Entry point
 
 └── README.md     # Setup and documentation
-
 
 
 ##  UI & Accessibility
