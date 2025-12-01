@@ -1,0 +1,16 @@
+{
+    "name": "sanjanajemi/quick_serve",
+    "description": "A web application based ordering and restaurant management system",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sanjana Akter Jemi",
+            "email": "sanjanaakter283@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
