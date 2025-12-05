@@ -65,19 +65,34 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* Back Link Styling (global) */
+.back-link {
+  display: inline-block;
+  padding: 12px;
+  background-color: #4a8cc6; 
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.back-link:hover {
+  background-color: #113d5f;
+}
+
 /* Responsive Layout */
 @media (max-width: 768px) {
-  /* Reduce page padding */
   body {
     padding: 25px;
   }
 
-  /* Adjust form spacing */
   form {
     padding: 25px 30px;
   }
 
-  /* Adjust input size */
   input,
   select {
     font-size: 15px;
@@ -86,30 +101,26 @@ button:hover {
 }
 
 @media (max-width: 480px) {
-  /* Smaller page padding */
   body {
     padding: 20px;
   }
 
-  /* Smaller title */
   h2 {
     font-size: 1.4rem;
   }
 
-  /* Adjust form padding */
   form {
     padding: 20px;
   }
 
-  /* Mobile input fields */
   input,
   select {
     font-size: 14px;
     padding: 9px;
   }
 
-  /* Full-width button */
-  button {
+  button,
+  .back-link {
     width: 100%;
     padding: 12px;
   }

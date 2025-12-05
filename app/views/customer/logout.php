@@ -3,10 +3,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Clear all session data
+
 $_SESSION = [];
 
-// Delete session cookie
+
 if (ini_get('session.use_cookies')) {
     $params = session_get_cookie_params();
     setcookie(
@@ -22,6 +22,6 @@ if (ini_get('session.use_cookies')) {
 
 session_destroy();
 
-// After logout → Go to guest homepage
+
 header('Location: /quick_serve/home/dashboard');
 exit;

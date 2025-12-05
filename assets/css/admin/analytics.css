@@ -42,7 +42,7 @@ h2, h3 {
 /* Dashboard button */
 .dashboard-button {
   padding: 10px 16px;
-  background-color: var(--success);
+  background-color: #00bcd4;
   color: #fff;
   text-decoration: none;
   border-radius: 6px;
@@ -100,9 +100,19 @@ h2, h3 {
 .in-progress { background-color: #e6f0ff; border-top: 4px solid var(--primary-dark); }
 .ready { background-color: #f0fff0; border-top: 4px solid var(--success); }
 .ready-for-pickup { background-color: #f0f8ff; border-top: 4px solid var(--info); }
-.cancelled { background-color: #ffecec; border-top: 4px solid var(--danger); }
+.nostatus { background-color: #ffecec; border-top: 4px solid var(--danger); }
 .revenue { background-color: #f0fff0; border-top: 4px solid var(--green-dark); }
 
+
+.nostatus {
+  background-color: #fbeaea;        
+  color: var(--danger);             
+  font-weight: bold;
+}
+
+.box.nostatus:hover {
+  background-color: #f8d7da;        
+  box-shadow: 0 4px 12px rgba(217, 83, 79, 0.3); }
 /* Toggle buttons for summary switching */
 .summary-toggle {
   margin-bottom: 20px;
@@ -145,7 +155,7 @@ th, td {
 }
 
 th {
-  background-color: #f0f0f0;
+  background-color: #50c9e2;
   font-weight: bold;
 }
 
@@ -245,6 +255,7 @@ td.negative {
 .confirm-box .no:hover {
   background: #31b0d5;
 }
+
 
 /* Responsive layout adjustments */
 @media (max-width: 600px) {

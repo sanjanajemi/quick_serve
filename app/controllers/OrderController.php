@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+//Customer inteface uses this controller
+
 use App\Models\OrderModel;
 use App\Models\OrderItemModel;
 use App\Models\MenuModel;
@@ -119,7 +121,7 @@ class OrderController
         OrderModel::addItem(
             $newOrderId,
             $item['menu_item_id'],
-            $item['unit_price'],   // make sure getItems() selects this
+            $item['unit_price'],   
             $item['quantity']
         );
     }

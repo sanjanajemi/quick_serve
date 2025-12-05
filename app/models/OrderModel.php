@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Models;
 
+//Customer +Staff + Admin inteface uses this model
 use App\Core\Database;
 use PDOException;
 use PDO;
@@ -9,12 +9,21 @@ use PDO;
 class OrderModel
 {
 
-public static function createWithCustomer(array $customerData, array $orderData): int
-{
+    //Staff interface functions
+
+    /**
+     * Create new order with customer details
+     * Inserts customer if not existing and create order with NULL status
+     * @param array $customerData
+     * @param array $orderData
+     * @return int New order ID
+     */
+    public static function createWithCustomer(array $customerData, array $orderData): int
+    {
     $db = Database::connect();
     $db->beginTransaction();
 
-    // Step 1: Check if customer already exists by email
+    // Check if customer already exists by email
     $stmtCheck = $db->prepare("SELECT customer_id FROM customer WHERE email = ?");
     $stmtCheck->execute([$customerData['email']]);
     $existingCustomer = $stmtCheck->fetch(PDO::FETCH_ASSOC);
@@ -34,7 +43,7 @@ public static function createWithCustomer(array $customerData, array $orderData)
         $customerId = (int)$db->lastInsertId();
     }
 
-    // Step 2: Insert order with NULL status
+    //  Insert order with NULL status
     $stmtOrder = $db->prepare("
         INSERT INTO `order` (customer_id, status, placed_at, comments, final_amount)
         VALUES (?, NULL, NOW(), ?, ?)
@@ -46,7 +55,7 @@ public static function createWithCustomer(array $customerData, array $orderData)
     ]);
     $orderId = (int)$db->lastInsertId();
 
-    // Step 3: Insert items if provided
+    //  Insert items if provided
     if (!empty($orderData['items'])) {
         $stmtItem = $db->prepare("
             INSERT INTO order_item (order_id, menu_item_id, quantity)
@@ -58,11 +67,15 @@ public static function createWithCustomer(array $customerData, array $orderData)
             }
         }
     }
-
     $db->commit();
-    return $orderId;
-}
+    return $orderId;}
 
+
+    /**
+     * Fetch all active orders with items
+     * Returns orders those are NULL, 'Received', 'Preparing', 'Ready' excluding Cleared and Cancelled one
+     *@return array list of active orders with items
+     */
     public static function fetchActiveOrdersWithItems()
     {
         $db = Database::connect();
@@ -119,7 +132,11 @@ public static function createWithCustomer(array $customerData, array $orderData)
         return array_values($orders);
     }
 
-    //NEW
+    /**
+     * Fetch all orders for history view
+     * Returns all orders with customer name, ordered by placement time.
+     * @return array List of orders with customer names
+     */
     public static function fetchAllOrdersForHistory()
     {
         $db = Database::connect();
@@ -134,6 +151,11 @@ public static function createWithCustomer(array $customerData, array $orderData)
     }
 
 
+    /**
+     * Fetch single order with items by ID
+     * @param int $orderId
+     * @return array null Order details with items or null if not found
+     */
     public static function fetchSingleOrder($orderId)
     {
         $db = Database::connect();
@@ -162,7 +184,8 @@ public static function createWithCustomer(array $customerData, array $orderData)
 
         return $order;
     }
-    //ADMIN INTERFACE
+
+    //ADMIN INTERFACE Functions
 
 
     public static function fetchActiveOrders()
@@ -446,13 +469,13 @@ WHERE order_id LIKE :query
         }
     }
     
-     //customer interface
+     //Customer interface
      public static function createOrder($customerId, $amount, $comments = null)
     {
         $pdo = Database::connect();
         $stmt = $pdo->prepare("
             INSERT INTO `order` (customer_id, placed_at, final_amount, comments, status)
-            VALUES (?, NOW(), ?, ?, 'pending')
+            VALUES (?, NOW(), ?, ?, NULL)
         ");
         $stmt->execute([$customerId, $amount, $comments]);
 

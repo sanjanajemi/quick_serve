@@ -7,6 +7,16 @@
     
 </head>
 <body>
+  <?php if (!empty($errors)): ?>
+    <div class="error-messages">
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li style="color:red;"><?php echo htmlspecialchars($error); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
   <div class="form-card">
     <h2>Edit Admin Info</h2>
     <form method="POST" action="/quick_serve/admin/profile/update">

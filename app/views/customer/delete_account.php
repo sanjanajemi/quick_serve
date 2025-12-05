@@ -23,7 +23,7 @@ $customerAvatar = $_SESSION['customer_avatar'] ?? "default.png";
 <body>
     <button class="go-back-btn" onclick="history.back()">← Go Back</button>
 
-<!-- FLASH MESSAGE -->
+
 <?php if (!empty($_SESSION['flash_message'])): ?>
     <div id="flashToast" class="flash-toast <?= $_SESSION['flash_type'] ?? '' ?>">
         <?= htmlspecialchars($_SESSION['flash_message']) ?>
@@ -39,11 +39,11 @@ setTimeout(() => {
 }, 100);
 </script>
 
-<!-- BACKGROUND -->
+
 <div class="page-bg" style="background-image:url('/quick_serve/assets/images/customer/hero1.png');"></div>
 <div class="page-bg-overlay"></div>
 
-<!-- SIDEBAR -->
+
 <div class="sidebar">
     <img src="/quick_serve/assets/images/logo/logo.png" class="logo">
 
@@ -57,7 +57,7 @@ setTimeout(() => {
     <a href="/quick_serve/customer/logout">Logout</a>
 </div>
 
-<!-- TOPBAR -->
+
 <div class="topbar">
     <strong>Delete Account</strong>
     <div>
@@ -66,7 +66,7 @@ setTimeout(() => {
     </div>
 </div>
 
-<!-- CONTENT -->
+
 <div class="page-content">
 
     <div class="delete-container">
@@ -79,7 +79,7 @@ setTimeout(() => {
 
         <p>Before continuing, please confirm your password.</p>
 
-        <!-- FORM: password first → then countdown → then delete -->
+        
         <form id="deleteForm" method="POST" action="/quick_serve/customer/delete_account/confirm">
 
             <label for="password"><strong>Enter your password:</strong></label>

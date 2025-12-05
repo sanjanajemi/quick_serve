@@ -31,7 +31,16 @@ h2 {
 
 /* Green Button */
 .alt-button {
-  background-color: #4cd137;
+ 
+    display: inline-block;
+    background: #00bcd4;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s 
+ease;
 }
 
 /* Blue Button Hover */
@@ -41,7 +50,7 @@ h2 {
 
 /* Green Button Hover */
 .alt-button:hover {
-  background-color: #44bd32;
+  background-color: #2e7cc0;
 }
 
 /* Data Table */

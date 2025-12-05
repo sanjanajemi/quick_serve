@@ -1,6 +1,11 @@
   let cart = {};
 
-    // Add item to cart
+    /** 
+     * Add item to cart
+     * @param {number} id - Item ID
+     * @param {string} name - Item Name
+     * @param {number} price - Item Price in DKK
+     */ 
     function addToCart(id, name, price) {
       if (!cart[id]) cart[id] = {
         name,
@@ -11,7 +16,10 @@
       renderCart();
     }
 
-    // Remove one unit of an item
+    /**Remove one unit of an item from the cart
+     * If quaantity reaches zero the item is deleted from the cart
+     * @param {number} id - Item ID
+     */
     function removeFromCart(id) {
       if (cart[id]) {
         cart[id].qty--;
@@ -22,13 +30,19 @@
       }
     }
 
-    // Clear the entire cart
+    /**Clear the entire cart
+     * Resets cart to empty object and re renders the cart display
+     */
     function clearCart() {
       cart = {};
       renderCart();
     }
 
-    // Render cart items
+    /**Render cart items into the DOM
+     * Iterates through all items in thr cart and calculates the total.
+     * Dynamically builds HTML for each item with a remove button and a 'Clear button'
+     * Also updates the finalAmount input field with the total price
+     */
     function renderCart() {
       const cartDiv = document.getElementById('cartItems');
       cartDiv.innerHTML = '';
@@ -54,7 +68,11 @@
       document.getElementById('finalAmount').value = total.toFixed(2);
     }
 
-    // Comment validation
+    /**
+     * Validate the 'comments' field when the order form is submitted
+     * Allows only letters, numbers, spaces, and certain punctuation.
+     * If invalid characters are found, prevent form submission and show an error message.
+     */
     document.getElementById('orderForm').addEventListener('submit', function(e) {
       const commentField = document.getElementById('comments');
       const errorMsg = document.getElementById('commentError');
@@ -71,7 +89,12 @@
         errorMsg.style.display = 'none';
       }
     });
-    // Search filter
+
+
+    /**
+     * Filter menu items based on search input
+     * Matches agains item name and description
+     */
     document.getElementById('menuSearch').addEventListener('keyup', function() {
       const query = this.value.toLowerCase();
       document.querySelectorAll('.menu-item').forEach(item => {
@@ -85,6 +108,11 @@
       });
     });
 
+
+    /**Search for customer by email using AJAX
+     * If found populate the form fields with customer details
+     * Shows error message if customer not found
+     */
     function searchCustomer() {
   const email = document.getElementById('searchCustomerEmail').value.trim();
   const errorMsg = document.getElementById('customerSearchError');

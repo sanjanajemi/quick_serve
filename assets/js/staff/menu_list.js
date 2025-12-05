@@ -20,7 +20,7 @@
 
           // Optional confirmation
           const action = this.href.includes("publish") ? "publish" : "unpublish";
-          if (!confirm(`Are you sure you want to ${action} this item?`)) {
+          if (!confirm(`Are you sure you want to ${action} this item to customer?`)) {
             e.preventDefault();
           }
         });

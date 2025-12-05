@@ -2,14 +2,14 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Page Wrapper */
+
 .page-content {
-    margin-left: 260px; /* Space for sidebar */
+    margin-left: 260px; 
     padding: 40px;
     color: white;
 }
 
-/* Title */
+
 .page-content h1 {
     font-size: 32px;
     text-align: center;
@@ -17,7 +17,7 @@ body {
     font-weight: 700;
 }
 
-/* Card Wrapper */
+
 .card {
     background: rgba(255,255,255,0.18);
     border-radius: 16px;
@@ -29,13 +29,13 @@ body {
     color: white;
 }
 
-/* Section Titles */
+
 .card h3 {
     margin-top: 15px;
     font-size: 20px;
 }
 
-/* Divider Line */
+
 .card hr {
     border: none;
     height: 1px;
@@ -43,13 +43,13 @@ body {
     margin: 15px 0 20px 0;
 }
 
-/* Timeline List */
+
 .card ul {
     list-style: none;
     padding: 0;
 }
 
-/* Single Step */
+
 .card ul li {
     padding: 14px;
     margin-bottom: 12px;
@@ -62,14 +62,14 @@ body {
     transition: 0.25s ease-in-out;
 }
 
-/* Active Step Highlight */
+
 .card ul li.active {
     background: rgba(10,191,102,0.50);
     border-left: 6px solid #0abf66;
     box-shadow: 0px 4px 14px rgba(0,0,0,0.25);
 }
 
-/* Buttons Container */
+
 .card:last-child {
     display: flex;
     justify-content: center;
@@ -78,7 +78,7 @@ body {
     text-align: center;
 }
 
-/* Buttons */
+
 .card a.btn {
     display: inline-block;
     padding: 14px 20px;
@@ -97,12 +97,12 @@ body {
     transform: translateY(-3px);
 }
 
-/* Secondary Button */
+
 .card a.btn:nth-child(2) {
     background: #1572A1;
 }
 
-/* Go Back Button */
+
 .go-back-btn {
     position: absolute;
     top: 20px;
@@ -124,12 +124,12 @@ body {
     transform: translateY(-2px);
 }
 
-/* Topbar Title */
+
 .topbar strong {
     font-size: 20px;
     font-weight: 700;
 }
-/* TRACK ORDER TIMELINE STYLES */
+
 
 .status-timeline {
     list-style: none;
@@ -146,19 +146,19 @@ body {
     font-weight: 600;
 }
 
-/* Active Status Colors (MATCH STAFF INTERFACE) */
+
 .active-received {
-    background: #fff3cd; /* yellow */
+    background: #fff3cd; 
 }
 
 .active-preparing {
-    background: #ffe5b4; /* orange */
+    background: #ffe5b4; 
 }
 
 .active-ready {
-    background: #d6f5d6; /* green */
+    background: #d6f5d6; 
 }
 
 .active-cancelled {
-    background: #ffcccc; /* red */
+    background: #ffcccc; 
 }

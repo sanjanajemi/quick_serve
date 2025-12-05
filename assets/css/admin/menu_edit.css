@@ -70,7 +70,28 @@ button:hover {
     border-radius: 6px;
     color: #cc0000;
 }
-
+/* Container to align the back link */
+.back-link-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 20px;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background-color: #45a4f7;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  
+}
+.back-link:hover {
+  background-color: #224966;
+}
 /* Tablet layout adjustments */
 @media (max-width: 768px) {
     body {

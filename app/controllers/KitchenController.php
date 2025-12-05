@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Controllers;
+
+//Staff inteface uses this controller
 
 require_once __DIR__ . '/../../libs/PHPMailer-master/src/PHPMailer.php';
 require_once __DIR__ . '/../../libs/PHPMailer-master/src/SMTP.php';
@@ -17,13 +20,23 @@ use PDO;
 
 class KitchenController
 {
+
+    /**
+     * Display active orders with their items in kitchen view
+     * @return void
+     */
     public function kitchenView()
     {
         $orders = OrderModel::fetchActiveOrdersWithItems();
         View::render('staff.kitchen_view', ['orders' => $orders]);
     }
 
-
+    /*  Edit Functionality */
+    /**
+     * Updates order status
+     * Reads JSON input, validates order ID and status and updates in database
+     * @return void
+     */
     public function updateOrderStatus()
     {
         $input = json_decode(file_get_contents('php://input'), true);
@@ -42,8 +55,12 @@ class KitchenController
         echo json_encode(['success' => $success]);
     }
 
-
-
+    /*Filter Functionality */
+    /**
+     * Poll active orders count
+     * Returns number of orders with NULL, 'Received', or 'Preparing' status as JSON
+     * @return void
+     */
     public function pollOrders()
     {
         $db = Database::connect();
@@ -53,6 +70,11 @@ class KitchenController
     }
 
 
+    /**
+     * Send order ready email to customer
+     * Uses PHPMailer with SMTP configuuration, builds HTML template,log results and returns JSON response
+     * @return void
+     */
     public function sendEmail()
     {
         $input = json_decode(file_get_contents('php://input'), true);
@@ -118,6 +140,12 @@ class KitchenController
         }
     }
 
+    /**
+     * Builds HTML email template for ready notification
+     * @param array $order Order details including items and customer info
+     * @return string HTML email content
+     */
+
     private function buildEmailTemplate($order)
     {
         $itemsHtml = '';
@@ -136,9 +164,9 @@ class KitchenController
         $cardColor = '#dae6f4ff';
 
         return "
-<html>
-<body style='font-family: Arial, sans-serif; background-color: #06253eff; padding: 20px; color: #333;'>
-    <div style='max-width: 600px; margin: auto; background-color: {$cardColor}; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>
+    <html>
+    <body style='font-family: Arial, sans-serif; background-color: #06253eff; padding: 20px; color: #333;'>
+       <div style='max-width: 600px; margin: auto; background-color: {$cardColor}; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>
         <h2 style='color: #2c3e50; margin-bottom: 10px;'>Order #{$orderId}</h2>
         <p style='font-size: 16px;'>Hi {$customerName},</p>
         <p style='font-size: 18px; color: #062f49ff; font-weight: bold;'>🎉 Your order is ready!</p>
@@ -147,13 +175,17 @@ class KitchenController
         " . ($comments ? "<p style='margin-top: 15px; font-style: italic; color: #555;'>Kitchen note: {$comments}</p>" : "") . "
         <p style='margin-top: 30px;'>Thank you for ordering with <strong>Brock Cafe</strong>!</p>
         <p style='font-size: 12px; color: #888; margin-top: 40px;'>This is an automated message. Please do not reply to this email.</p>
-    </div>
-</body>
-</html>
-";
+       </div>
+    </body>
+    </html>";
     }
 
-
+    /**
+     * Mark an order as cleared
+     * Inserts order ID into cleared_orders and returns JSON response
+     * @return void
+     */
+   /*  Delete Functionality */
     public function clearOrder()
     {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -169,7 +201,12 @@ class KitchenController
         }
     }
 
-
+     /**
+     * Display order history with cleared status
+     * Requires staff login and renders order history view
+     * @return void
+     */
+    /* List Functionality */
     public function orderHistory()
     {
         \App\Helpers\SessionHelper::requireStaffLogin();
@@ -195,6 +232,12 @@ class KitchenController
         \App\Core\View::render('staff.order_history', ['orders' => $orders]);
     }
 
+
+    /**
+     * Restore a previously cleared order
+     * Deletes order ID from cleared orders and returns JSON response
+     * @return void
+     */
     public function restoreOrder()
     {
         \App\Helpers\SessionHelper::requireStaffLogin();
@@ -210,15 +253,17 @@ class KitchenController
             } catch (\PDOException $e) {
                 error_log("KitchenController::restoreOrder error: " . $e->getMessage());
                 $success = false;
-            }
-        }
-
+            } }
         header('Content-Type: application/json');
         echo json_encode(['success' => $success]);
         exit;
     }
 
-
+    /**
+     * Display details of a specific order
+     * Fetches order by ID and renders order details view
+     * @return void
+     */
     public function orderDetails()
     {
         $orderId = $_GET['order_id'] ?? null;
@@ -234,8 +279,12 @@ class KitchenController
         \App\Core\View::render('staff.order_details', ['order' => $order]);
     }
 
-
-    // GET: Show Cancel Orders page
+    /*Delete Functionality */
+    /**
+     * Display cancel order page .
+     * Fetches active orders and renders cancel order view. 
+     * @return void
+     */
     public function cancelOrderPage()
     {
         $db = Database::connect();
@@ -252,7 +301,12 @@ class KitchenController
         require __DIR__ . '/../views/staff/cancel_order.php';
     }
 
-    // POST: Cancel order via JS fetch()
+
+    /**
+     * Cancel an order and notify the customer who had ordered it.
+     * Updates order status to 'Cancelled', sends an email notification and returns JSON response.
+     * @return void
+     */
     public function cancelOrder()
     {
         header('Content-Type: application/json');
@@ -316,27 +370,39 @@ class KitchenController
         }
     }
 
+
+
+     /**
+      * Builds HTML email template for order cancellation notification
+      * @param array $order Order details including customer info
+      * @return string HTML email body
+      */
     private function buildCancellationTemplate($order)
     {
         $customerName = htmlspecialchars($order['customer_name']);
         $orderId = (int)$order['order_id'];
 
         return "
-<html>
-<body style='font-family: Arial, sans-serif; background-color: #f5f7fa; padding: 20px; color: #333;'>
-    <div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>
+      <html>
+      <body style='font-family: Arial, sans-serif; background-color: #f5f7fa; padding: 20px; color: #333;'>
+      <div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>
         <h2 style='color: #c62828; margin-bottom: 10px;'>Order #{$orderId} Cancelled</h2>
         <p style='font-size: 16px;'>Hi {$customerName},</p>
         <p style='font-size: 16px; color: #c62828; font-weight: bold;'>We regret to inform you that your order has been cancelled.</p>
         <p style='margin-top: 20px;'>If you have any questions, please contact our support team.</p>
         <p style='margin-top: 30px;'>Thank you for choosing <strong>Quick Serve</strong>.</p>
         <p style='font-size: 12px; color: #888; margin-top: 40px;'>This is an automated message. Please do not reply to this email.</p>
-    </div>
-</body>
-</html>
-";
-    }
+       </div>
+       </body>
+       </html>
+      "; }
 
+
+    /* Add Functionality */
+    /**
+    * Render ADD Order Page with available menu items.
+    * @return void
+    */
     public function addOrderPage()
     {
         \App\Helpers\SessionHelper::requireStaffLogin();
@@ -351,6 +417,13 @@ class KitchenController
         ]);
     }
 
+
+    /*Find Functionality */
+    /**
+     * Find customer by email for order placement.
+     * Returns customer data as JSON if found.
+     * @return void
+     */
     public function findCustomer()
     {
         \App\Helpers\SessionHelper::requireStaffLogin();
@@ -367,6 +440,12 @@ class KitchenController
         }
     }
 
+
+    /*  Add Functionality */
+    /**
+     * Place a new order with customer and items
+     * @return void
+     */
     public function placeOrder()
     {
         SessionHelper::requireStaffLogin();
@@ -391,32 +470,43 @@ class KitchenController
         ]);
     }
 
- public function receiptPage()
-{
-   SessionHelper::requireStaffLogin();
 
-    $orderId = $_GET['order_id'] ?? null;
-    if (!$orderId) {
-        echo "❌ No order ID provided.";
-        return;
+
+    /**
+     * Display receipt page for a specific order.
+     * @return void
+     */
+    public function receiptPage()
+    {
+        SessionHelper::requireStaffLogin();
+
+        $orderId = $_GET['order_id'] ?? null;
+        if (!$orderId) {
+            echo "❌ No order ID provided.";
+            return;
+        }
+
+        $order = OrderModel::getOrderDetails((int)$orderId);
+
+        if (empty($order)) {
+            echo "❌ Order not found.";
+            return;
+        }
+
+        View::render('staff.receipt', [
+            'order' => $order
+        ]);
     }
 
-    $order = OrderModel::getOrderDetails((int)$orderId);
 
-    if (empty($order)) {
-        echo "❌ Order not found.";
-        return;
+    
+     /**
+     * Show order success confirmation page
+     * @return void
+     */
+    public function orderSuccessPage()
+    {
+        SessionHelper::requireStaffLogin();
+        View::render('staff.order_success');
     }
-
-    View::render('staff.receipt', [
-        'order' => $order
-    ]);
-}
-
-public function orderSuccessPage()
-{
-     SessionHelper::requireStaffLogin();
-    View::render('staff.order_success');
-}
-
 }

@@ -1,88 +1,16 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+if (session_status() === PHP_SESSION_NONE) session_start();
 
-require_once __DIR__ . '/../../core/Database.php';
-
-use App\Core\Database;
-
-$customerId = $_SESSION['customer_id'] ?? null;
-
-if (!$customerId) {
+if (!isset($_SESSION['customer_id'])) {
     header("Location: /quick_serve/customer/login");
     exit;
 }
 
-$pdo = Database::connect();
-
-/* -------- Fetch current customer data -------- */
-$stmt = $pdo->prepare("SELECT name, email, avatar FROM customer WHERE customer_id = ?");
-$stmt->execute([$customerId]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$name   = $user['name']   ?? "";
-$email  = $user['email']  ?? "";
-$avatar = $user['avatar'] ?? "default.jpg";
-
-/* -------- Handle Update -------- */
-if (isset($_POST['save_changes'])) {
-
-    $newName  = trim($_POST['name']);
-    $newEmail = trim($_POST['email']);
-    $newPass  = $_POST['new_password'] ?? "";
-    $oldPass  = $_POST['old_password'] ?? "";
-
-    /* ------ Avatar upload handling ------ */
-    if (!empty($_FILES['avatar']['name'])) {
-
-        $file = $_FILES['avatar'];
-        $ext  = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $newFilename = "avatar_" . $customerId . "_" . time() . "." . $ext;
-        $uploadPath = __DIR__ . "/../../../storage/uploads/" . $newFilename;
-
-        if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-            // update avatar in DB
-            $avatar = $newFilename;
-            $pdo->prepare("UPDATE customer SET avatar = ? WHERE customer_id = ?")
-                ->execute([$newFilename, $customerId]);
-            $_SESSION['customer_avatar'] = $newFilename;
-        }
-    }
-
-    /* ------ Update Name & Email ------ */
-    $pdo->prepare("UPDATE customer SET name = ?, email = ? WHERE customer_id = ?")
-        ->execute([$newName, $newEmail, $customerId]);
-
-    $_SESSION['customer_name'] = $newName;
-
-
-    if ($oldPass && $newPass) {
-
-        $stmt = $pdo->prepare("SELECT password FROM customer WHERE customer_id = ?");
-        $stmt->execute([$customerId]);
-        $currentHash = $stmt->fetchColumn();
-
-        if (password_verify($oldPass, $currentHash)) {
-            $newHash = password_hash($newPass, PASSWORD_DEFAULT);
-            $pdo->prepare("UPDATE customer SET password = ? WHERE customer_id = ?")
-                ->execute([$newHash, $customerId]);
-        }
-    }
-
-    // Update session with latest values
-    $_SESSION['customer_name'] = $newName;
-    if (!empty($avatar)) {
-        $_SESSION['customer_avatar'] = $avatar;
-    }
-
-    $_SESSION['flash_message'] = "Your account settings have been updated!";
-
-    // Redirect to dashboard
-    header("Location: /quick_serve/app/views/customer/dashboard.php");
-    exit;
-}
+$customerName   = $_SESSION['customer_name'] ?? "";
+$customerEmail  = $_SESSION['customer_email'] ?? "";
+$customerAvatar = $_SESSION['customer_avatar'] ?? "default.png";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,57 +22,75 @@ if (isset($_POST['save_changes'])) {
 </head>
 
 <body>
-    <button class="go-back-btn" onclick="history.back()">← Go Back</button>
 
-    <div class="global-bg"></div>
-    <div class="global-bg-overlay"></div>
+<button class="go-back-btn" onclick="history.back()">← Go Back</button>
 
-    <div class="settings-container">
+<div class="global-bg"></div>
+<div class="global-bg-overlay"></div>
 
-        <h2>⚙️ Account Settings</h2>
+<div class="settings-container">
 
-        <?php if (!empty($_SESSION['flash_message'])): ?>
-            <div class="success-msg">
-                <?= htmlspecialchars($_SESSION['flash_message']) ?>
-            </div>
-            <?php unset($_SESSION['flash_message']); ?>
-        <?php endif; ?>
+    <h2>⚙️ Account Settings</h2>
 
-        <form method="POST" enctype="multipart/form-data" class="settings-form">
+    
+    <?php if (!empty($_SESSION['flash_message'])): ?>
+        <div class="<?= $_SESSION['flash_type'] ?? 'flash' ?>">
+            <?= htmlspecialchars($_SESSION['flash_message']) ?>
+        </div>
+        <?php unset($_SESSION['flash_message'], $_SESSION['flash_type']); ?>
+    <?php endif; ?>
 
-            <!-- PROFILE IMAGE -->
-            <div class="avatar-section">
-                <img src="/quick_serve/storage/uploads/<?= htmlspecialchars($avatar) ?>"
-                    class="avatar-preview"
-                    alt="Profile Avatar">
+    
+    <form method="POST" action="/quick_serve/customer/settings/avatar" enctype="multipart/form-data" class="settings-form">
 
-                <label class="upload-btn">
-                    Change Avatar
-                    <input type="file" name="avatar" accept="image/*">
-                </label>
-            </div>
-            <!-- NAME -->
-            <label>Full Name</label>
-            <input type="text" name="name" value="<?= htmlspecialchars($name) ?>" required>
+        <div class="avatar-section">
+            <img src="/quick_serve/storage/uploads/<?= htmlspecialchars($customerAvatar) ?>"
+                 class="avatar-preview">
 
-            <!-- EMAIL -->
-            <label>Email</label>
-            <input type="email" name="email" value="<?= htmlspecialchars($email) ?>" required>
+            <label class="upload-btn">
+                Change Avatar
+                <input type="file" name="customer_profile_picture" accept="image/*">
+            </label>
+        </div>
 
-            <h3>🔐 Change Password (optional)</h3>
+        <button type="submit" class="save-btn">Update Avatar</button>
+    </form>
 
-            <!-- OLD PASSWORD -->
-            <label>Current Password</label>
-            <input type="password" name="old_password">
 
-            <!-- NEW PASSWORD -->
-            <label>New Password</label>
-            <input type="password" name="new_password">
+    
+    <form method="POST" action="/quick_serve/customer/settings/update" class="settings-form">
 
-            <button type="submit" name="save_changes" class="save-btn">Save Changes</button>
-        </form>
-    </div>
+        <label>Full Name</label>
+        <input type="text" name="name" value="<?= htmlspecialchars($customerName) ?>" required>
+
+        <label>Email</label>
+        <input type="email" name="email" value="<?= htmlspecialchars($customerEmail) ?>" required>
+
+        <label>Address</label>
+        <input type="text" name="address" value="<?= htmlspecialchars($_SESSION['customer_address'] ?? '') ?>">
+
+        <button type="submit" class="save-btn">Save Profile</button>
+    </form>
+
+
+    
+    <form method="POST" action="/quick_serve/customer/settings/password" class="settings-form">
+
+        <h3>🔐 Change Password</h3>
+
+        <label>Current Password</label>
+        <input type="password" name="current_password">
+
+        <label>New Password</label>
+        <input type="password" name="new_password">
+
+        <label>Confirm Password</label>
+        <input type="password" name="confirm_password">
+
+        <button type="submit" class="save-btn">Change Password</button>
+    </form>
+
+</div>
 
 </body>
-
 </html>

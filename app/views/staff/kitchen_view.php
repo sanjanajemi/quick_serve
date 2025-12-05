@@ -52,7 +52,7 @@
               <button class="clear-btn" onclick="removeOrderCard(this)"> ✖ </button>
             </div>
             <h2>Order #<?= htmlspecialchars($order['order_id']) ?></h2>
-            <p><strong>Placed:</strong> <?= htmlspecialchars($order['placed_at']) ?> (<span class="elapsed-time" data-time="<?= htmlspecialchars($order['placed_at']) ?>"></span> ago)</p>
+            <p><strong>Placed:</strong> <?= htmlspecialchars($order['placed_at']) ?> <span class="elapsed-time" data-time="<?= htmlspecialchars($order['placed_at']) ?>"></span> </p>
             <ul>
               <?php foreach ($order['items'] as $item): ?>
                 <li><?= htmlspecialchars($item['name']) ?> × <?= $item['quantity'] ?></li>

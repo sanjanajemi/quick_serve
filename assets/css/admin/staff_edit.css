@@ -1,8 +1,17 @@
-/* Base layout */
+:root {
+  --bg-light: #f5f7fa;
+  --card-bg-light: #ffffff;
+  --text-light: #09304f;
+  --accent-light: #03243f;
+  --accent-dark: #478497;
+  --danger-dark: #fd3c3c;
+  --border-light: #d1d5db;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f5f7fa; /* light background */
-  color: #09304f;            /* deep slate text */
+  background-color: var(--bg-light);
+  color: var(--text-light);
   margin: 0;
   padding: 20px;
   display: flex;
@@ -10,7 +19,6 @@ body {
   align-items: center;
 }
 
-/* Top navigation */
 .top-nav {
   width: 100%;
   text-align: left;
@@ -25,20 +33,19 @@ body {
   border-radius: 8px;
   text-decoration: none;
   color: #ffffff;
-  background-color: #478497;
+  background-color: var(--accent-dark);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .back-btn:hover {
-  background-color: #bd9efb;
+  background-color: var(--accent-light);
   transform: scale(1.05);
 }
 
-/* Card container */
 .edit-profile-card {
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
+  background-color: var(--card-bg-light);
+  border: 1px solid var(--border-light);
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   padding: 30px;
@@ -46,29 +53,27 @@ body {
   width: 100%;
 }
 
-/* Heading */
 .edit-profile-card h2 {
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 22px;
-  color: #478497;
+  color: var(--accent-dark);
   text-align: center;
 }
 
-/* Form labels */
 label {
   font-weight: bold;
   margin-top: 10px;
   display: block;
+  color: var(--accent-light);
 }
 
-/* Form inputs */
 input[type="text"],
 input[type="email"],
 input[type="file"],
 select {
   padding: 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-light);
   border-radius: 6px;
   font-size: 16px;
   width: 100%;
@@ -79,20 +84,20 @@ select {
 
 input:focus,
 select:focus {
-  border-color: #478497;
+  border-color: var(--accent-dark);
   outline: none;
 }
 
-/* Profile image preview */
-.profile-img {
+.profile-img,
+img[src*="/storage/uploads/"] {
   display: block;
   margin: 15px auto;
   max-width: 150px;
   border-radius: 6px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* Buttons */
 .btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -101,21 +106,24 @@ select:focus {
   border-radius: 8px;
   cursor: pointer;
   color: #ffffff;
-  background-color: #478497;
+  background-color: var(--accent-dark);
   transition: background 0.3s ease, transform 0.2s ease;
   text-decoration: none;
 }
 
 .btn:hover {
-  background-color: #bd9efb;
+  background-color: var(--accent-light);
   transform: scale(1.05);
 }
 
 .cancel-btn {
-  background-color: #fd3c3c;
+  background-color: var(--danger-dark);
 }
 
-/* Button layout */
+.cancel-btn:hover {
+  background-color: #b22222;
+}
+
 .form-actions {
   display: flex;
   gap: 10px;
@@ -123,17 +131,16 @@ select:focus {
   margin-top: 20px;
 }
 
-/* Footer button */
 .card-footer {
   margin-top: 25px;
   text-align: center;
-  border-top: 1px solid #d1d5db;
+  border-top: 1px solid var(--border-light);
   padding-top: 15px;
 }
 
 .footer-btn {
-  background-color: #478497;
-  color: #ecf4f8;
+  background-color: var(--accent-dark);
+  color: #ffffff;
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
   text-decoration: none;
@@ -143,11 +150,29 @@ select:focus {
 }
 
 .footer-btn:hover {
-  background-color: #bd9efb;
+  background-color: var(--accent-light);
   transform: scale(1.05);
 }
 
-/* Tablet responsiveness */
+.back-button {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.back-button a {
+  background-color: #478497;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.back-button a:hover {
+ background-color: #113d5f;
+}
 @media (max-width: 768px) {
   .edit-profile-card {
     padding: 20px;
@@ -168,7 +193,6 @@ select:focus {
   }
 }
 
-/* Mobile responsiveness */
 @media (max-width: 480px) {
   body {
     padding: 10px;

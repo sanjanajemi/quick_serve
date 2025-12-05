@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>All Customer Details</title>
-  <link rel="stylesheet" href="/quick_serve/assets/css/admin/customer_full_list.css"/>
+  <link rel="stylesheet" href="/quick_serve/assets/css/admin/customer_full_list.css?v=23"/>
   <style>
     .no-results { color: red; font-weight: bold; }
   </style>
@@ -58,7 +58,7 @@
               <tr>
                 <td><?= htmlspecialchars($order['order_id'] ?? '') ?></td>
                 <td><?= !empty($order['placed_at']) ? date('d M Y', strtotime($order['placed_at'])) : '' ?></td>
-                <td><?= htmlspecialchars($order['status'] ?? '') ?></td>
+ <td><?= !empty($order['status']) ? htmlspecialchars($order['status']) : 'Nostatus' ?></td>
                 <td><?= htmlspecialchars($order['final_amount'] ?? '0') ?> DKK</td>
               </tr>
             <?php endforeach; ?>

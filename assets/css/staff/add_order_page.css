@@ -102,7 +102,8 @@ header .back-btn:hover {
 
 .search-bar {
   width: 50%;
-  padding: 15px 20px;
+  padding: 10px 20px;
+ transform: translateX(15%);
   background: var(--card-bg-light);
   border-bottom: 1px solid var(--border-light);
   box-sizing: border-box;
@@ -282,6 +283,12 @@ header .back-btn:hover {
 .cart-column button[type="submit"]:hover {
   background: var(--danger-dark);
   transform: scale(1.05);
+}
+.error-msg {
+  color: red;
+  display: none;
+  font-size: 0.9em;
+  margin-top: 4px;
 }
 
 /* Cart Items */

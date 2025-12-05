@@ -38,26 +38,15 @@
   <?php endforeach; ?>
 </table>
 
-<div class="actions">
-  <!-- Status Update Form -->
-  <form action="/quick_serve/admin/order/update-status" method="post">
-    <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>" />
-    <label for="status">Update Status:</label>
-    <select name="status" id="status">
-      <option value="Received" <?= $order['status'] === 'Received' ? 'selected' : '' ?>>Received</option>
-      <option value="Preparing" <?= $order['status'] === 'Preparing' ? 'selected' : '' ?>>Preparing</option>
-      <option value="Completed" <?= $order['status'] === 'Completed' ? 'selected' : '' ?>>Completed</option>
-      <option value="Cancelled" <?= $order['status'] === 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
-    </select>
-    <button type="submit">Update</button>
-  </form>
+
 
   <!-- Print Button -->
   <button onclick="window.print()" style="margin-top: 1em; background:#00bcd4; color:white; padding:10px 20px; border:none; border-radius:6px;">
    Print Invoice
 </button>
+<div class="back-link-container">
 <a href="/quick_serve/admin/order/list" class="back">← Back to Order List</a>
-
+</div>
  <script src="\quick_serve\assets\js\admin\staff_add.js"></script>
 </body>
 </html>

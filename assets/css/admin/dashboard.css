@@ -59,6 +59,13 @@ body {
   border-radius: 8px;
   margin-bottom: 2em;
 }
+.topbar-logo {
+  height: 40px;
+  max-width: 120px;
+  object-fit: contain;
+  margin-right: 1em;
+  border-radius: 4px;
+}
 
 .topbar .top-right {
   display: flex;
@@ -83,6 +90,8 @@ body {
   background-color: #00bcd4;
   color: #1e1e2f;
 }
+
+
 
 /* Profile dropdown */
 .profile-menu {
@@ -268,6 +277,12 @@ body {
 
 /* Mobile layout */
 @media (max-width: 600px) {
+
+   .topbar-logo {
+    height: 32px;
+    max-width: 100px;
+  }
+
   .menu-toggle {
     display: block;
     background-color: #0097a7;

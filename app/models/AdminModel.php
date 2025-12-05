@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+//Admin inteface uses this model
+
 use App\Core\Database;
 use PDO;
 

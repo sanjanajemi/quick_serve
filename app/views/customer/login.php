@@ -38,17 +38,17 @@ setTimeout(() => {
 }, 100);
 </script>
 
-<!-- Background Image + Blur -->
+
 <div class="page-bg" style="background-image: url('/quick_serve/assets/images/customer/hero1.png');"></div>
 <div class="page-bg-overlay"></div>
 
-<!-- CENTER LOGIN BOX -->
+
 <div class="center-container">
 
     <form class="auth-card" method="POST" action="/quick_serve/customer/login/submit">
 
 
-        <!-- NEW LOGO -->
+        
         <img
             src="/quick_serve/assets/images/logo/logo.png"
             class="auth-logo"
@@ -57,12 +57,12 @@ setTimeout(() => {
 
         <h2 class="auth-title">Customer Login</h2>
 
-        <!-- ERROR BOX -->
+        
         <?php if ($error): ?>
             <div class="error-box"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
 
-        <!-- Redirect target (cart, checkout, dashboard, etc.) -->
+        
         <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
 
         <label>Email</label>
@@ -83,6 +83,5 @@ setTimeout(() => {
     </form>
 
 </div>
-
 </body>
 </html>

@@ -1,29 +1,23 @@
-/* --------------------------------------------------------
-   GLOBAL FIXED BACKGROUND (same on all pages)
---------------------------------------------------------- */
-
 .global-bg {
   position: fixed;
   inset: 0;
   background-image: url('/quick_serve/assets/images/customer/hero1.png');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* IMPORTANT */
+  background-attachment: fixed; 
   z-index: -10;
 }
 
 .global-bg-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45); /* same tint as your dashboard */
+  background: rgba(0, 0, 0, 0.45); 
   backdrop-filter: blur(6px);
   z-index: -9;
 }
 
 
-/* --------------------------------------------------------
-   SIDEBAR
---------------------------------------------------------- */
+
 .sidebar {
   position: fixed;
   top: 0; left: 0;
@@ -66,9 +60,7 @@
   box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
 }
 
-/* --------------------------------------------------------
-   TOPBAR / NAVBAR
---------------------------------------------------------- */
+
 .topbar {
   margin-left: 0px;
   height: 90px;
@@ -83,11 +75,11 @@
   box-shadow: 0px 6px 20px rgba(0,0,0,0.25);
 }
 
-/* Flexbox gap for nav items */
+
 .top-left {
   display: flex;
   align-items: center;
-  gap: 40px; /* adjust spacing here */
+  gap: 40px; 
 }
 
 .nav-btn {
@@ -115,9 +107,7 @@
   box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
 }
 
-/* --------------------------------------------------------
-   PAGE CONTENT
---------------------------------------------------------- */
+
 .page-content {
   margin-left: 250px;
   padding: 40px 35px;
@@ -125,9 +115,7 @@
   z-index: 5;
 }
 
-/* --------------------------------------------------------
-   LOGIN / REGISTER CARDS
---------------------------------------------------------- */
+
 .center-container {
   width: 100%;
   height: 100vh;
@@ -195,9 +183,7 @@ input[type="text"] {
   box-shadow: 0px 6px 18px rgba(0,0,0,0.18);
 }
 
-/* --------------------------------------------------------
-   CARDS
---------------------------------------------------------- */
+
 .card {
   background: rgba(255,255,255,0.9);
   backdrop-filter: blur(6px);
@@ -212,9 +198,7 @@ input[type="text"] {
   transition: 0.25s;
 }
 
-/* --------------------------------------------------------
-   BUTTONS
---------------------------------------------------------- */
+
 .btn {
   display: inline-block;
   padding: 12px 18px;
@@ -231,9 +215,7 @@ input[type="text"] {
   box-shadow: 0px 6px 16px rgba(0,0,0,0.2);
 }
 
-/* --------------------------------------------------------
-   FLASH TOAST
---------------------------------------------------------- */
+
 .flash-toast {
   position: fixed;
   top: 20px;
@@ -260,9 +242,6 @@ input[type="text"] {
   color: #7a0a0a;
 }
 
-/* --------------------------------------------------------
-   DASHBOARD CTA BUTTON
---------------------------------------------------------- */
 .dashboard-cta {
   display: inline-block;
   margin-top: 100px;
@@ -289,7 +268,7 @@ input[type="text"] {
 }
 
 .top-right span {
-    margin-right: 25px; /* move hello text away from avatar */
+    margin-right: 25px; 
 }
 .go-back-btn {
     position: fixed;

@@ -6,10 +6,10 @@ use App\Core\Database;
 
 $db = Database::connect();
 
-// Selected category
+
 $category = $_GET['category'] ?? null;
 
-// Fetch menu items using OOP (later you will use MenuController)
+
 if ($category) {
     $stmt = $db->prepare("SELECT * FROM menu_item WHERE category = ? ORDER BY name");
     $stmt->execute([$category]);
@@ -18,7 +18,7 @@ if ($category) {
     $menuItems = [];
 }
 
-// Init dashboard cart (ONLY CHANGE REQUIRED)
+
 if (!isset($_SESSION['dashboard_cart'])) {
     $_SESSION['dashboard_cart'] = [];
 }
@@ -30,7 +30,7 @@ $cartCount = count($_SESSION['dashboard_cart']);
     <meta charset="UTF-8">
     <title>Start Your Order · Brock Café</title>
 
-    <!-- Exact same CSS -->
+    
     <link rel="stylesheet" href="/quick_serve/assets/css/customer/global.css">
     <link rel="stylesheet" href="/quick_serve/assets/css/customer/menu.css">
     <link rel="stylesheet" href="/quick_serve/assets/css/customer/cart.css">
@@ -39,15 +39,15 @@ $cartCount = count($_SESSION['dashboard_cart']);
 <body>
     <button class="go-back-btn" onclick="history.back()">← Go Back</button>
 
-<!-- Global background -->
+
 <div class="global-bg"></div>
 <div class="global-bg-overlay"></div>
 
-<!-- CART ICON -->
+
 <div class="cart-icon" id="openCart"> Cart 🛒 <span id="cart-count"><?= $cartCount ?></span>
 </div>
 
-<!-- CART DRAWER -->
+
 <div class="cart-drawer" id="cartDrawer">
 
     <div class="cart-overlay" id="closeCart"></div>
@@ -108,7 +108,6 @@ $cartCount = count($_SESSION['dashboard_cart']);
 
     <h2><?= htmlspecialchars($category) ?> Menu</h2>
 
-    <a href="menu_item.php" class="btn" style="margin-bottom:20px;">← Back to Categories</a>
 
     <div class="menu-container">
 
@@ -123,7 +122,7 @@ $cartCount = count($_SESSION['dashboard_cart']);
                     <p><?= htmlspecialchars($item['description']) ?></p>
                     <p><strong>Price:</strong> <?= number_format($item['price'], 2) ?> DKK</p>
 
-                    <!-- ONLY URL CHANGED -->
+                    
                     <form method="POST" action="/quick_serve/customer/cart/add" class="add-to-cart-form">
 
                         <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
@@ -178,6 +177,18 @@ async function loadCart() {
         document.getElementById("cart-count").textContent = data.count;
     }
 }
+function getQueryParam(key) {
+    return new URLSearchParams(window.location.search).get(key);
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    await loadCart();
+
+    // If coming from dashboard deals → auto-open cart
+    if (getQueryParam("open_cart") === "1") {
+        document.getElementById("cartDrawer").classList.add("open");
+    }
+});
 
 async function updateCart(id, action) {
     const body = `menu_item_id=${id}&action=${action}`;

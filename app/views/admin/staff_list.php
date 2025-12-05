@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Manage Staff</title>
-  <link rel="stylesheet" href="\quick_serve\assets\css\admin\staff_list.css" />
+  <link rel="stylesheet" href="\quick_serve\assets\css\admin\staff_list.css?v=17" />
   
 </head>
 <body>
@@ -32,7 +32,7 @@
           <td>
             <a href="/quick_serve/admin/staff/view?id=<?= urlencode($member['staff_id']) ?>"> View</a>
             <a href="/quick_serve/admin/staff/edit?id=<?= urlencode($member['staff_id']) ?>"> Edit</a>
-            <a href="/quick_serve/admin/staff/delete?id=<?= urlencode($member['staff_id']) ?>" onclick="return confirm('Delete this staff member?')">🗑️ Delete</a>
+            <a href="/quick_serve/admin/staff/delete?id=<?= urlencode($member['staff_id']) ?>" onclick="return confirm('Delete this staff member?')"> Delete</a>
           </td>
         </tr>
       <?php endforeach; ?>

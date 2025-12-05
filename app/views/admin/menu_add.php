@@ -53,10 +53,12 @@
         <?php if (!empty($old['image_url'])): ?>
             <img src="<?= htmlspecialchars($old['image_url']) ?>" alt="Preview Image" class="image-preview">
         <?php endif; ?>
-
         <button type="submit">Create Item</button>
+        <div class="back-link-container">
+       <a href="/quick_serve/admin/menu" class="back-link">← Back to Menu</a>
+        </div>
     </form>
-
+    
     <script src="\quick_serve\assets\js\admin\menu_add.js"></script>
 </body>
 

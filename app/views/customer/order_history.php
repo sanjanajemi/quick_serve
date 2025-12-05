@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../../core/Database.php';
 use App\Core\Database;
 
-// Protect page
+
 if (!isset($_SESSION['customer_id'])) {
     header("Location: /quick_serve/customer/login");
     exit;
@@ -16,7 +16,7 @@ $customerId = $_SESSION['customer_id'];
 
 $pdo = Database::connect();
 
-// Fetch all orders
+
 $stmt = $pdo->prepare("
     SELECT o.order_id, o.placed_at, o.final_amount, o.status
     FROM `order` o
@@ -32,7 +32,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Your Order History</title>
 
-    <!-- Reuse your dashboard CSS so background works -->
+    
     <link rel="stylesheet" href="/quick_serve/assets/css/customer/global.css">
     <link rel="stylesheet" href="/quick_serve/assets/css/customer/order_history.css">
 
@@ -40,7 +40,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <button class="go-back-btn" onclick="history.back()">← Go Back</button>
-    <!-- same hero background as dashboard -->
+    
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
 

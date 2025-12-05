@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+//Customer inteface uses this controller
+
 use App\Models\OrderModel;
 
 class FeedbackController

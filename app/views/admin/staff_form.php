@@ -26,6 +26,7 @@
 
     <input type="file" name="profile_picture">
     <button type="submit"><?= isset($staff) ? 'Update' : 'Add' ?> Staff</button>
+    <a href="/quick_serve/admin/staff/list" class="button">← Back to Staff List</a>
   </form>
 
 </body>

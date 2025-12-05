@@ -1,6 +1,4 @@
-/* --------------------------------------------------------
-   HERO SECTION
---------------------------------------------------------- */
+
 .hero-bg {
   position: fixed;
   inset: 0;
@@ -53,9 +51,7 @@
   box-shadow: 0px 12px 32px rgba(0,0,0,0.4);
 }
 
-/* --------------------------------------------------------
-   DEALS SECTION
---------------------------------------------------------- */
+
 .deals-section {
   margin: 60px auto;
   width: 100%;
@@ -117,16 +113,14 @@
   margin-top: 6px;
 }
 
-/* --------------------------------------------------------
-   DROPDOWN MENU (Our Menu)
---------------------------------------------------------- */
+
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
 .dropbtn {
-  /* Unified with nav-btn */
+  
   background: rgba(255,255,255,0.15);
   padding: 16px 28px;
   border-radius: 12px;
@@ -169,21 +163,19 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
-/* --------------------------------------------------------
-   TRACK ORDER — PAGE CONTENT POSITION FIX
---------------------------------------------------------- */
+
 
 .page-content {
-    margin-top: 40px !important;   /* move tracking content UP */
+    margin-top: 40px !important;   
     padding-bottom: 60px;
 }
 
-/* When tracking is active, reduce spacing from other sections */
+
 body.tracking-active #deals-section {
     margin-top: 20px !important;
 }
 
-/* Tracking box styling */
+
 .tracking-box {
     background: rgba(255,255,255,0.95);
     padding: 25px;
@@ -196,7 +188,7 @@ body.tracking-active #deals-section {
     animation: fadeIn 0.3s ease;
 }
 
-/* subtle fade animation */
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -214,14 +206,12 @@ body.blurred {
     background: rgba(0,0,0,0.5);
     z-index: 9999;
 }
-/* ============================
-   DELETE ACCOUNT POPUP STYLING
-===============================*/
+
 
 .delete-modal {
     position: fixed;
     inset: 0;
-    display: none; /* shown with JS */
+    display: none; 
     justify-content: center;
     align-items: center;
     background: rgba(0,0,0,0.55);
@@ -290,30 +280,27 @@ body.blurred {
     background: #444;
 }
 
-/* Background blur */
+
 .blur-background {
     filter: blur(4px);
 }
 
 
-/* Smooth fade animation */
+
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.95); }
     to   { opacity: 1; transform: scale(1); }
 }
 
-/* --------------------------------------------------------
-   TOPBAR LOGO
---------------------------------------------------------- */
 .topbar-logo {
-    height: 48px;        /* adjust size */
+    height: 48px;        
     width: auto;
-    margin-right: 20px;  /* adds spacing before menu button */
+    margin-right: 20px;  
 }
 .dashboard-cart {
     position: absolute;
-    top: 80px;       /* Adjust until perfect */
-    right: 40px;     /* Align under avatar */
+    top: 80px;       
+    right: 40px;     
     background: white;
     color: #007bff;
     font-weight: bold;
@@ -326,7 +313,7 @@ body.blurred {
     transition: transform 0.2s ease, background 0.2s;
 }
 
-/* Move dashboard cart icon slightly down */
+
 .topbar .cart-icon {
     margin-top: 10px;
 }
@@ -335,11 +322,9 @@ body.blurred {
     transform: scale(1.07);
     background: #f0f8ff;
 }
-/* ==========================================
-   DASHBOARD CART DRAWER (matches menu_item)
-=========================================== */
 
-/* Drawer container */
+
+
 .cart-drawer {
     position: fixed;
     top: 0;
@@ -350,7 +335,7 @@ body.blurred {
     pointer-events: none;
 }
 
-/* Drawer sliding panel */
+
 .cart-panel {
     position: absolute;
     top: 0;
@@ -364,7 +349,7 @@ body.blurred {
     transition: right 0.3s ease;
 }
 
-/* Dark background overlay */
+
 .cart-overlay {
     position: fixed;
     top: 0;
@@ -376,7 +361,7 @@ body.blurred {
     z-index: 1500;
 }
 
-/* When drawer is open */
+
 .cart-drawer.open .cart-panel {
     right: 0;
 }
@@ -385,7 +370,7 @@ body.blurred {
     display: block;
 }
 
-/* Footer + Buttons */
+
 .cart-footer {
     margin-top: 20px;
 }

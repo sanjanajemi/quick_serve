@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Models;
 
+//Home + Customer + Staff + Admin interface uses this model
 use App\Models\DatabaseModel;
 use PDO;
 
@@ -194,20 +194,16 @@ class MenuModel extends DatabaseModel
         return $item ?: null;
     }
 
-    //customer
-    public function getByCategory(string $category): array
-    {
-        $sql = "SELECT * FROM menu_item WHERE category = ? ORDER BY name";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$category]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // Functions from Customer Interface
+   public function getByCategory(string $category): array {
+    $sql = "SELECT * FROM menu_item WHERE category = :category AND status = 'published' ORDER BY name";
+    $stmt = $this->query($sql, ['category' => $category]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-    // Get ALL menu items
+public function getAll(): array {
+    $sql = "SELECT * FROM menu_item WHERE status = 'published' ORDER BY name";
+    return $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
 
-    public function getAll(): array
-    {
-        $sql = "SELECT * FROM menu_item ORDER BY name";
-        return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
 }

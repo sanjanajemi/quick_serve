@@ -1,23 +1,21 @@
-# Restaurant Management System (MVC, PHP + MySQL)
+# Restaurant Management System (MVC, HTML + CSS, PHP + JavaScript,  MySQL)
 
 A full-featured restaurant management system built with **HTML, PHP, JavaScript and MySQL**, following a clean **MVC architecture** and **SoC**(Separation of Concerns).  
 The system supports three main user roles: **Customer, Staff, Admin**.  
 
 -  **Customers** can place orders, download receipts, receive email notifications, and track order progress.  
--  **Staff** can manage orders, place orders, cancel orders, update statuses, hide/show menu items and interact with a real-time kitchen dashboard.  
--  **Admins** can configure menus, manage staff, manage customers, add admins, see order analytics and calculate revenue.  
+-  **Staff** can manage orders, place orders, cancel orders, update status of order, hide/show menu items and interact with a real-time kitchen dashboard.  
+-  **Admins** can configure menu, manage staff, manage customers, add admins, see order analytics and calculate revenue.  
 
 
 This project was designed to simulate a real-world restaurant workflow with 
-**secure backend logic**, 
-**responsive UI**, and 
-**role-based access control**.
+**secure backend logic**, **responsive UI**, and **role-based access control** without any specialized hardware integration.
 
 
 ##  Features
 
 ### Authentication & Security
-- Secure login for**Customer**, **Staff** and **Admin**
+- Secure login for **Customer**, **Staff** and **Admin**
 - Passwords stored with `password_hash()` and verified with `password_verify()`
 - CSRF tokens for form submissions
 - `htmlspecialchars()` for XSS prevention
@@ -47,7 +45,9 @@ This project was designed to simulate a real-world restaurant workflow with
 ###  Admin Features
 - Secure login with admin credentials.
 - Manage admin account.
-- Manage staff accounts, customer list and manage menu
+- Create new staff accounts, manage staff accounts.
+- Add new menu item and manage existing items.
+- Manage customer list and customer accounts.
 - Create new admin and manage account.
 - Hide/Show menu items dynamically to cutomers.
 - Access full customer order history.
@@ -75,6 +75,20 @@ Import the SQL file located at project root:'brock_cafe.sql'
 5. **Run the Project**  
 In your browser, visit: localhost/quick_serve
 
+
+## ID and Password for Staff and Admin interface:
+
+**Staff:**
+ID: 123123
+Password: test123@
+
+**Admin:**
+ID: 123123
+Password: test123@
+
+
+
+
 ## System design:
 
 (Single entry point based system design)
@@ -83,13 +97,13 @@ quick_serve/
 
 ├── app/       # controllers, models, views, core and helpers
 
-├── assets/    # css, images, js and sounds
+├── assets/    # css, images, js(validation) and sounds
 
 ├── config/    # autoload, config, db, email and routes
 
-├── storage/    # logs and uploads
+├── storage/   # logs and uploads
 
-├── tests/       # logs and tests
+├── tests/     # logs and tests
 
 ├── .env
 
@@ -115,11 +129,12 @@ quick_serve/
 
 ##  Team Contributions
 
-- **Tirsana** –Customer Interface Developer  
-- **Sanjana** – System Designer & Staff Interface Developer (Scrum master) 
-- **Nusrat** – Admin Interface Developer
+- **Tirsana** – Customer Interface Developer  
+- **Sanjana** – System Designer,Home page and Staff Interface Developer (Scrum master) 
+- **Nusrat**  – Admin Interface Developer
 
 
+# Author of the documentation - Sanjana Akter Jemi
 
 ##  License
 

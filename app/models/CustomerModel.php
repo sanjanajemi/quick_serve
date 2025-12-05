@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Models;
 
+//Customer + Admin inteface uses this model
 use App\Core\Database;
 use PDO;
 

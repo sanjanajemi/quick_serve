@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Models;
+
+//Customer inteface uses this model
 
 class CartModel
 {

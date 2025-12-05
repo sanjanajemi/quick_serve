@@ -29,7 +29,6 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 </div>
 
 <script>
-// Load cart from server
 function loadCart() {
     fetch("/quick_serve/customer/cart/items")
         .then(res => res.json())
@@ -68,7 +67,7 @@ function removeFromCart(id) {
 
 
 
-// Load cart immediately
+
 loadCart();
 </script>
 

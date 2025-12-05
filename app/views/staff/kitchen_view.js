@@ -1,30 +1,46 @@
 
-    // Toggle dark mode
+    /**Toggle dark mode on or off
+     * Add or removes dark mode css class from the body element
+     */ 
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
     }
 
     // Sound toggle
   const soundToggleBtn = document.getElementById("soundToggleBtn");
-
   // Load saved preference or default to true
   let soundEnabled = localStorage.getItem("soundEnabled") === "false" ? false : true;
-
   // Set initial button label
   updateSoundButton();
 
+
+
+
+  /**
+   * Toggle sound alerts on or off
+   * Saves thepreference in local storage and  updates the button label
+   */
   function toggleSound() {
     soundEnabled = !soundEnabled;
     localStorage.setItem("soundEnabled", soundEnabled);
     updateSoundButton();
   }
 
+
+  /**
+   * Update the sound toggle button label based on current state
+   */
   function updateSoundButton() {
     soundToggleBtn.textContent = soundEnabled
       ? "🔔 Sound Alerts ON"
       : "🔕 Sound Alerts OFF";
   }
 
+
+  /**
+   * Play an alert sound if enabled
+   * Resets playback position before playing.
+   */
   function playAlertSound() {
     if (!soundEnabled) return;
     const sound = document.getElementById("alertSound");
@@ -34,7 +50,13 @@
     }
 
 }
-    //  Search orders
+
+
+
+    /**
+     * Search orders by query string
+     * Matches against order ID and order card text content.
+    */ 
     function searchOrders() {
       const query = document.getElementById('searchBar').value.toLowerCase();
       const cards = document.querySelectorAll('.order-card');
@@ -46,7 +68,12 @@
       });
     }
 
-    //  Filter orders by status
+
+
+    /**
+     * Filter order by status
+     * Shows only card matching the selected status or all if 'all' is selected
+    */ 
  function filterOrders() {
   const status = document.getElementById('statusFilter').value;
   const cards = document.querySelectorAll('.order-card');
@@ -61,7 +88,13 @@
     card.style.display = match ? 'block' : 'none';
   });
 }
-    //  Sort orders by waiting time
+
+
+    /** 
+     * Sort orders by waiting time in descending order
+     * Reorders DOM elements inside the order list container
+    */
+   
     function sortByWaitingTime() {
       const container = document.querySelector('.order-list');
       const cards = Array.from(container.querySelectorAll('.order-card'));
@@ -70,7 +103,12 @@
       cards.forEach(card => container.appendChild(card));
     }
 
-    //  Update order status
+    /**
+     * Update order status
+     * Sends POST request to the server and updates the UI with feedback
+     * @param {number} orderId - Identifier for the order
+     * @param {string} newStatus - New status to assign to order.
+     * */
     function updateStatus(orderId, newStatus) {
       fetch('/quick_serve/staff/update_status', {
           method: 'POST',
@@ -101,7 +139,11 @@
         });
     }
 
-    // Send mail
+    /**
+     * Send  an email related to an order
+     * Plays sound and shows toast on success
+     * @param {number} orderId - Identifier for the order
+     *  */ 
     function sendEmail(orderId) {
      fetch('/quick_serve/staff/send_email', {
           method: 'POST',
@@ -130,8 +172,11 @@
         });
     }
 
-    //  Poll for new orders---fix it tomorrowmorning
-  
+   
+  /**
+   * Poll the server for new orders every 30 seconds
+   * Plays sound and reloads page if new orders are found
+   */
 
     function checkForNewOrders() {
       fetch('/quick_serve/staff/kitchen_poll')
@@ -150,10 +195,16 @@
         })
         .catch(error => console.error('Polling error:', error));
     }
-
+    //Poll every 30 seconds
     setInterval(checkForNewOrders, 30000);
 
-    //  Toast notification
+
+
+    /**
+     * Display a temporary toast notification message
+     * Automatically removes the toast after 3 seconds
+     * @param {string} message - The message to display in the toast
+     * */
     function showToast(message) {
       const toast = document.createElement('div');
       toast.className = 'toast';
@@ -163,7 +214,12 @@
     }
 
 
-    //NEW
+    /**
+     * Remove order card from the kitchen view
+     * Sends POST request to server to clear the order
+     * @param {HTMLElement} button - The button element at to right of the order card
+     *  */ 
+
   function removeOrderCard(button) {
   const card = button.closest('.order-card');
   const orderId = card?.dataset.orderId;

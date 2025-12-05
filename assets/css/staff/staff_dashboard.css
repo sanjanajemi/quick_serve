@@ -97,6 +97,25 @@ body.dark-mode .toggle-btn {
 nav a:hover, .toggle-btn:hover {
   background: #4338ca;
 }
+.dashboard-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #033a51;
+}
+
+.brand {
+  display: flex;             
+  align-items: center;        
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  padding: 10px;
+}
 
 main {
   padding: 2rem;

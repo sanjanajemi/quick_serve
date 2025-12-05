@@ -1,5 +1,4 @@
 <?php
-// Show errors while developing
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -12,7 +11,7 @@ use App\Core\Database;
 
 $pdo = Database::connect();
 
-// 1) Make sure user is logged in
+
 if (!isset($_SESSION['customer_id'])) {
     echo "<h1 style='color:red;'>You must be logged in to use deals.</h1>";
     echo '<p><a href="/quick_serve/app/views/customer/login.php">Go to login</a></p>';
@@ -26,9 +25,7 @@ $orderId     = null;
 $orderTotal  = 0.0;
 $successText = "";
 
-// ------------------------------------------------------
-// 2) Handle each deal type
-// ------------------------------------------------------
+
 try {
     $pdo->beginTransaction();
 
@@ -59,19 +56,19 @@ try {
         }
         unset($line);
 
-        // Insert order
+        
         $orderStmt = $pdo->prepare("
             INSERT INTO `order` (customer_id, placed_at, final_amount, status)
             VALUES (?, NOW(), ?, ?)
         ");
         $orderStmt->execute([
             $customerId,
-            $orderTotal,      // 85.00
+            $orderTotal,      
             'Pending',
         ]);
         $orderId = $pdo->lastInsertId();
 
-        // Insert items
+        
         $itemStmt = $pdo->prepare("
             INSERT INTO order_item (order_id, menu_item_id, unit_price, total_price, quantity)
             VALUES (?, ?, ?, ?, ?)
@@ -89,20 +86,18 @@ try {
 
         $successText = "Shawarma Combo Ordered!";
 
-    // ───────────────────────────────
-    // B) Morning Brew – 10% off ONE drink type (id 24), any quantity
-    // ───────────────────────────────
+    
     } elseif ($dealCode === 'coffee_discount') {
 
-        $MORNING_BREW_ID = 24;   // the drink included in the deal
+        $MORNING_BREW_ID = 24;   
 
-        // quantity can come from URL, default = 1
+        
         $quantity = isset($_GET['qty']) ? (int)$_GET['qty'] : 1;
         if ($quantity < 1) {
             $quantity = 1;
         }
 
-        // Load original price + name
+        
         $priceStmt = $pdo->prepare("
             SELECT name, price
             FROM menu_item
@@ -119,11 +114,11 @@ try {
         }
 
         $originalPrice   = (float)$menuItem['price'];
-        $discountedPrice = round($originalPrice * 0.9, 2); // 10% off per cup
+        $discountedPrice = round($originalPrice * 0.9, 2); 
         $lineTotal       = $discountedPrice * $quantity;
         $orderTotal      = $lineTotal;
 
-        // Insert order
+        
         $orderStmt = $pdo->prepare("
             INSERT INTO `order` (customer_id, placed_at, final_amount, status)
             VALUES (?, NOW(), ?, ?)
@@ -135,7 +130,7 @@ try {
         ]);
         $orderId = $pdo->lastInsertId();
 
-        // Insert single order item with chosen quantity
+        
         $itemStmt = $pdo->prepare("
             INSERT INTO order_item (order_id, menu_item_id, unit_price, total_price, quantity)
             VALUES (?, ?, ?, ?, ?)
@@ -143,8 +138,8 @@ try {
         $itemStmt->execute([
             $orderId,
             $MORNING_BREW_ID,
-            $discountedPrice,  // discounted price per drink
-            $lineTotal,        // discounted total for all drinks
+            $discountedPrice,  
+            $lineTotal,        
             $quantity,
         ]);
 
@@ -152,7 +147,7 @@ try {
             . (int)$quantity . " × " . htmlspecialchars($menuItem['name']) . ")";
 
     } else {
-        // Unknown or missing deal → back to dashboard
+        
         $pdo->rollBack();
         header('Location: /quick_serve/home/dashboard');
         exit;
@@ -170,9 +165,7 @@ try {
     exit;
 }
 
-// ------------------------------------------------------
-// 3) Success page (shared for both deals)
-// ------------------------------------------------------
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

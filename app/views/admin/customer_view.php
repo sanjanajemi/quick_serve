@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Customer Details</title>
-  <link rel="stylesheet" href="/quick_serve/assets/css/admin/customer_view.css">
+  <link rel="stylesheet" href="/quick_serve/assets/css/admin/customer_view.css?v=21">
 </head>
 <body>
 
@@ -12,22 +12,8 @@
   <table class="details">
     <tr><th>Name:</th><td><?= htmlspecialchars($customer['name']) ?></td></tr>
     <tr><th>Email:</th><td><?= htmlspecialchars($customer['email']) ?></td></tr>
-    <tr><th>Account Status:</th><td><?= htmlspecialchars($customer['account_status'] ?? 'N/A') ?></td></tr>
+    <!-- Removed Account Status row -->
   </table>
-
- <div class="actions">
-        <?php if ($customer['account_status'] === 'active'): ?>
-          <a href="/quick_serve/admin/customer/status?id=<?= $customer['customer_id'] ?>&status=inactive"
-             onclick="return confirm('Deactivate this customer?');">Deactivate</a>
-        <?php else: ?>
-          <a href="/quick_serve/admin/customer/status?id=<?= $customer['customer_id'] ?>&status=active"
-             onclick="return confirm('Activate this customer?');">Activate</a>
-        <?php endif; ?>
-    
-    <a href="/quick_serve/admin/customer/delete?id=<?= $customer['customer_id'] ?>"
-       class="delete"
-       onclick="return confirm('Are you sure you want to delete this customer?');">Delete Customer</a>
-  </div>
 
   <?php if (!empty($customer['orders'])): ?>
     <h3>Order History</h3>
@@ -43,10 +29,10 @@
       <tbody>
         <?php foreach ($customer['orders'] as $order): ?>
           <tr>
-            <td><?= $order['order_id'] ?></td>
+            <td><?= htmlspecialchars($order['order_id']) ?></td>
             <td><?= date('d M Y', strtotime($order['placed_at'])) ?></td>
-            <td><?= $order['status'] ?></td>
-            <td><?= $order['final_amount'] ?> DKK</td>
+            <td><?= !empty($order['status']) ? htmlspecialchars($order['status']) : 'Nostatus' ?></td>
+            <td><?= htmlspecialchars($order['final_amount']) ?> DKK</td>
           </tr>
         <?php endforeach; ?>
       </tbody>
@@ -76,6 +62,6 @@
     });
   </script>
 
-   <script src="\quick_serve\assets\js\admin\customer_view.js"></script>
+  <script src="/quick_serve/assets/js/admin/customer_view.js"></script>
 </body>
 </html>

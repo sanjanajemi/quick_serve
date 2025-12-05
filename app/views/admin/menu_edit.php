@@ -19,7 +19,7 @@
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="/quick_serve/admin/menu/update">
+    <form method="POST" action="/quick_serve/admin/menu/update" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $item['menu_item_id'] ?>">
 
         <label>Name</label>
@@ -45,10 +45,26 @@
             <option value="published" <?= $item['status'] === 'published' ? 'selected' : '' ?>>Published</option>
             <option value="unpublished" <?= $item['status'] === 'unpublished' ? 'selected' : '' ?>>Unpublished</option>
         </select>
+          <label>Image</label>
+        <?php if (!empty($item['image_url'])): ?>
+            <div class="current-image">
+                <img src="<?= htmlspecialchars($item['image_url']) ?>" alt="Current image" style="max-width:150px;">
+                <p></p>
+            </div>
+        <?php endif; ?>
+        <input type="file" name="image_file" accept="image/*">
+
 
         <button type="submit">Update Item</button>
+            <div class="back-link-container">
+        <a href="/quick_serve/admin/menu" class="back-link">← Back to Menu</a>
+      </div>
     </form>
-
+    
+    <script src="\quick_serve\assets\js\admin\menu_list.js"></script>
+</body>
+</html>
+    
     <script src="\quick_serve\assets\js\admin\menu_list.js"></script>
 </body>
 </html>

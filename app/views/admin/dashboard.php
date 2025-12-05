@@ -8,8 +8,9 @@ $statusCounts = [
   'Cancelled' => 0,
   'No Status' => 0
 ];
-
-foreach ($recentOrders as $order) {
+$today = date('Y-m-d');
+foreach ($recentOrders as $order){
+  if (!empty($order['order_date']) && substr($order['order_date'], 0, 10) === $today) {
   $status = strtolower(trim($order['status'] ?? ''));
   $normalized = ucfirst($status);
   if (isset($statusCounts[$normalized])) {
@@ -18,7 +19,7 @@ foreach ($recentOrders as $order) {
     $statusCounts['No Status']++;
   }
 }
-
+}
 $hasStatusData = array_sum($statusCounts) > 0;
 
 // Calculate today's revenue
@@ -46,7 +47,7 @@ $totalRevenue = !empty($weeklySummary)
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QuickServe Admin Dashboard</title>
-  <link rel="stylesheet" href="/quick_serve/assets/css/admin/dashboard.css" />
+  <link rel="stylesheet" href="/quick_serve/assets/css/admin/dashboard.css?v=27" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -68,15 +69,17 @@ $totalRevenue = !empty($weeklySummary)
   </aside>
 
   <main class="main-content">
-    <header class="topbar">
-      <div class="top-right">
-        <a href="/quick_serve/admin/logout">Back to Home</a>
-      </div>
-    </header>
+   <header class="topbar">
+  <div class="top-right">
+   
+    <a href="/quick_serve/admin/logout">Back to Home</a>
+    <img src="/quick_serve/assets/images/logo/logo.png" class="topbar-logo" alt="QuickServe Logo">
+  </div>
+</header>
 
     <section class="metrics">
-      <div class="card">Total Orders Today: <strong><?= $metrics['total_orders'] ?? 0 ?></strong></div>
-      <div class="card">Cancelled Orders: <strong><?= $metrics['cancelled_orders'] ?? 0 ?></strong></div>
+      <div class="card">Total Orders Today: <strong><?= $todayMetrics['total_orders'] ?></strong></div>
+      <div class="card">Ready: <strong><?= $todayMetrics['status_breakdown']['ready'] ?></strong></div>
       <div class="card">Revenue Today: <strong>DKK <?= number_format($revenueToday, 2) ?></strong></div>
       <div class="card">
         7-Day Total Revenue:

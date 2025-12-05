@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Menu Management</title>
-    <link rel="stylesheet" href="\quick_serve\assets\css\admin\menu_list.css">
+    <link rel="stylesheet" href="\quick_serve\assets\css\admin\menu_list.css?v=7">
 </head>
 <body>
 
-    <h2>📋 Menu Management</h2>
-    <div style="text-align: center; margin-bottom: 20px;">
-        <a href="/quick_serve/admin/dashboard" class="add-button" style="background-color: #2ecc71;"> Back to Dashboard</a>
-        <a href="#" class="add-button toggle-button" id="toggleModeBtn">Toggle Mode</a>
-        <a href="/quick_serve/admin/menu/add" class="add-button"> Add New Item</a>
-    </div>
+   <div class="menu-header">
+  <h2>📋 Menu Management</h2>
+  <div class="menu-actions">
+       <a href="/quick_serve/admin/menu/add" class="btn add-btn">Add New Item</a>
+    <a href="/quick_serve/admin/dashboard" class="btn dashboard-btn">Back to Dashboard</a>
+ 
+  </div>
+</div>
 
     <div class="card-container">
         <?php foreach ($menuItems as $item): ?>
@@ -44,11 +46,6 @@
         <?php endforeach; ?>
     </div>
 
-    <script>
-        document.getElementById('toggleModeBtn').addEventListener('click', function () {
-            document.body.classList.toggle('dark-mode');
-        });
-    </script>
     <script src="\quick_serve\assets\js\admin\menu_list.js"></script>
 </body>
 </html>

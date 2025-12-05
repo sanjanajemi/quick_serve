@@ -1,5 +1,5 @@
 :root {
-  --bg-light: #eaeef4;
+  --bg-light: #ffffff;
   --text-light: #072746;
   --accent-light: #012a3a;
   --card-bg-light: #ffffff;
@@ -28,7 +28,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 4rem;
-  background: linear-gradient(to right, #d7eaf7, #033a51);
+  background: linear-gradient(to right, rgb(212, 236, 243), #114358);
   border-bottom: 1px solid var(--border-light);
   width: 100%;
   box-sizing: border-box;
@@ -39,6 +39,20 @@ body {
   font-size: 1.6rem;
   font-weight: 600;
 }
+
+/*  logo + title */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 48px;  
+  height: 48px;
+  object-fit: contain;
+}
+
 
 /* Navigation */
 .login-nav {
@@ -62,6 +76,13 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.toggle-btn,
+.dropbtn {
+  font-size: 1rem;       
+  min-width: 160px;      
+  padding: 0.6rem 1.2rem; 
+}
+
 
 .login-link:hover,
 .signup-link:hover,
@@ -143,39 +164,102 @@ body {
   background-color: var(--danger-dark);
 }
 
+
+/* Mobile Header Responsiveness */
+@media (max-width: 600px) {
+  .dashboard-header .header-top {
+    flex-direction: column;   
+    align-items: center;     
+    gap: 1rem;                
+    padding: 1rem;
+  }
+
+  .brand {
+    justify-content: center;  
+  }
+
+  .login-nav {
+    justify-content: center;  
+    flex-wrap: wrap;          
+    gap: 0.5rem;
+  }
+
+  .login-link,
+  .signup-link,
+  .dropbtn,
+  .toggle-btn {
+    font-size: 0.85rem;       
+    padding: 0.4rem 0.7rem;   
+    min-width: auto;       
+  }
+}
 /* Welcome Banner */
 .welcome-banner {
+  position: relative;             
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-light);
+  gap: 20px;
   padding: 20px 30px;
   border-radius: 12px;
   margin: 40px auto;
   max-width: 700px;
-  color: var(--text-light);
+  color: #fff;                     
+  text-align: center;
+  overflow: hidden;
+
+  /* Background image */
+  background: url('/quick_serve/assets/images/home/banner.png') center/cover no-repeat;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  gap: 20px;
 }
 
-.welcome-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  margin-right: 20px;
+/* Dark overlay */
+.welcome-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(27, 26, 26, 0.45);    
+  z-index: 0;
 }
 
+/*  text + marquee  */
+.welcome-text {
+  position: relative;
+  z-index: 1;
+}
 .welcome-text h2 {
   margin: 0;
   font-size: 24px;
 }
-
 .welcome-text p {
   margin: 5px 0 0;
   font-size: 16px;
+}
+
+.marquee {
+  position: relative;
+  z-index: 1;               
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;                
+  background: rgba(90, 77, 77, 0.5);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 12s linear infinite;
+}
+
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
 }
 
 /* Search */
@@ -282,7 +366,7 @@ body {
   max-width: 360px;
   margin: 2rem auto;
   padding: 1rem 1.5rem;
-  background-color: #d1e1e8;
+  background-color: rgb(212, 236, 243);
   border: 1px solid #cedfe4;
   border-radius: 10px;
   text-align: center;
@@ -375,7 +459,7 @@ body.dark-mode {
 
   /* Grid */
   .grid {
-    grid-template-columns: 1fr;  /* single column */
+    grid-template-columns: 1fr;  
     padding: 0 1rem;
   }
 
@@ -395,3 +479,157 @@ body.dark-mode {
     padding: 0.8rem;
   }
 }
+
+/* About Section  */
+.about-section {
+  position: relative;
+  padding: 4rem 2rem;
+  background-image: url('/quick_serve/assets/images/home/canteen.png'); 
+  background-size: cover;      
+  background-position: center; 
+  color: var(--text-light);
+  overflow: hidden;
+  margin: 30px 0;
+}
+
+/* Dark overlay */
+.about-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(37, 31, 31, 0.45); 
+  z-index: 0;
+}
+
+.about-container {
+  position: relative; 
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff; 
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+/* Animation keyframes */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Initial hidden state */
+.about-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Active state when visible */
+.about-section.show {
+  animation: fadeUp 1s ease forwards;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 2rem;
+  text-align: center;
+  background: rgb(181, 206, 214);
+  color: var(--text-light);
+  margin-top: 2rem;
+}
+
+body.dark-mode .contact-section {
+  background: var(--card-bg-dark);
+  color: var(--text-dark);
+}
+
+.contact-section h2 { margin-bottom: 1rem; }
+
+.contact-section p { margin: 0.3rem 0; }
+
+.contact-section a { color: var(--accent-light); text-decoration: none; }
+.contact-section a:hover { text-decoration: underline; }
+
+/* Social Links */
+.social-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+
+.social {
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 6px;
+   padding: 0.5rem 1rem;
+}
+
+.fb { background: #1743a2; }
+.insta { background: #c93da4; }
+.linkedin { background: #072b51; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 1.5rem 1rem;
+  }
+  .contact-section h2 {
+    font-size: 1.4rem;
+  }
+  .contact-section p {
+    font-size: 0.95rem;
+  }
+  .social {
+    flex: 1 1 45%; 
+  }
+}
+
+@media (max-width: 480px) {
+  .social {
+    flex: 1 1 100%; 
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
+img, .brand-logo, .welcome-pic {
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 480px) {
+  .social-links {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .social {
+    width: 100%;
+    text-align: center;
+  }
+}
+

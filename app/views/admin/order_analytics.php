@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Order Analytics Dashboard</title>
-  <link rel="stylesheet" href="/quick_serve/assets/css/admin/analytics.css" />
+  <link rel="stylesheet" href="/quick_serve/assets/css/admin/analytics.css?v=29" />
 </head>
 
 <body>
@@ -20,7 +20,7 @@
     'received' => 0,
     'preparing' => 0,
     'ready' => 0,
-    'cancelled' => 0,
+   
 
   ];
 
@@ -60,33 +60,40 @@
     </div>
   </div>
 
-  <h3>Last 7 Days Summary</h3>
+ <h3>Last 7 Days Summary</h3>
 
-  <?php if (!empty($weeklySummary)): ?>
-    <table>
-      <thead>
+<?php if (!empty($weeklySummary)): ?>
+  <table class="summery-table">
+
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Ready Orders</th>
+        <th>Revenue (DKK)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($weeklySummary as $day): ?>
         <tr>
-          <th>Date</th>
-          <th>Received Orders</th>
-          <th>Revenue (DKK)</th>
+          <td><?= date('d M Y', strtotime($day['summary_date'])) ?></td>
+          <td><?= $day['ready_orders'] ?? 0 ?></td>
+          <td><?= number_format($day['revenue'] ?? 0, 2) ?></td>
         </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($weeklySummary as $day): ?>
-          <tr>
-            <td><?= date('d M Y', strtotime($day['summary_date'])) ?></td>
-            <td><?= $day['received_orders'] ?? 0 ?></td>
-            <td><?= number_format($day['revenue'] ?? 0, 2) ?></td>
-          </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
-  <?php else: ?>
-    <p class="empty-message">No received orders found in the last 7 days.</p>
-  <?php endif; ?>
-
-
-  <script src="\quick_serve\assets\js\admin\staff_add.js"></script>
+      <?php endforeach; ?>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th scope="row">Weekly Total</th>
+        <td><?= array_sum(array_column($weeklySummary, 'ready_orders')) ?></td>
+        <td><?= number_format(array_sum(array_column($weeklySummary, 'revenue')), 2) ?></td>
+      </tr>
+    </tfoot>
+  </table>
+<?php else: ?>
+  <p class="empty-message" aria-live="polite">
+    No ready orders found in the last 7 days.
+  </p>
+<?php endif; ?>
 </body>
 
 </html>

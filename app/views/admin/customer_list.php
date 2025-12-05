@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Customer List</title>
-  <link rel="stylesheet" href="/quick_serve/assets/css/admin/customer_list.css">
+  <link rel="stylesheet" href="/quick_serve/assets/css/admin/customer_list.css?v=20">
 </head>
 <body>
 

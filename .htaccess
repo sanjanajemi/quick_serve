@@ -19,6 +19,9 @@ RewriteRule ^ index.php [QSA,L]
 </FilesMatch>
 
 
+# Block direct access to anything under /storage
+RewriteRule ^storage/ - [F,L]
+
 #  Prevent directory listing
 Options -Indexes
 

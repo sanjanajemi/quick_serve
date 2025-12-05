@@ -2,17 +2,17 @@
 require_once __DIR__ . '/../../core/Database.php';
 use App\Core\Database;
 
-// Enable errors temporarily
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Database
+
 $db = Database::connect();
 
-// Read category from URL
+
 $category = $_GET['category'] ?? null;
 
-// Fetch items ONLY if category selected
+
 if ($category) {
     $stmt = $db->prepare("SELECT * FROM menu_item WHERE category = ? ORDER BY name");
     $stmt->execute([$category]);
@@ -41,7 +41,7 @@ if ($category) {
 <div class="page-content">
 
 <?php if (!$category): ?>
-    <!-- CATEGORY SELECTION -->
+    
     <h2>Explore Our Menu:</h2>
 
     <div class="menu-container">
@@ -68,10 +68,8 @@ if ($category) {
 
 <?php else: ?>
 
-    <!-- VIEW ONLY ITEMS -->
+    
     <h2><?= htmlspecialchars($category) ?> Menu</h2>
-
-    <a href="menu_view.php" class="btn" style="margin-bottom:20px;">← Back to Categories</a>
 
     <div class="menu-container">
 

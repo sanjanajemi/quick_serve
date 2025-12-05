@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+//Home inteface uses this controller
+
 use App\Models\MenuModel;
 
 class MenuController {

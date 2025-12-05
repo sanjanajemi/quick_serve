@@ -1,5 +1,4 @@
 <?php
-// Safely pull values from $viewData
 $cart  = $viewData['cart']  ?? [];
 $total = $viewData['total'] ?? 0;
 ?>
@@ -9,21 +8,21 @@ $total = $viewData['total'] ?? 0;
     <meta charset="UTF-8">
     <title>Checkout · Brock Café</title>
 
-    <!-- External CSS -->
+    
     <link rel="stylesheet" href="/quick_serve/assets/css/customer/global.css">
     <link rel="stylesheet" href="/quick_serve/assets/css/customer/order_start.css">
 </head>
 <body>
     <button class="go-back-btn" onclick="history.back()">← Go Back</button>
 
-    <!-- GLOBAL BACKGROUND -->
+    
     <div class="global-bg"></div>
     <div class="global-bg-overlay"></div>
 
-    <!-- MAIN CONTENT -->
+    
     <div class="content">
 
-        <!-- HERO HEADER -->
+        
         <div class="hero-header">
             <h1>Checkout</h1>
         </div>

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="ExampleTest" file="C:\xampp\htdocs\quick_serve\tests\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.003115">
-    <testcase name="testBasicMath" file="C:\xampp\htdocs\quick_serve\tests\ExampleTest.php" line="6" class="ExampleTest" classname="ExampleTest" assertions="1" time="0.003115"/>
+  <testsuite name="ChangePasswordTest" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" tests="9" assertions="9" errors="0" failures="0" skipped="0" time="0.004605">
+    <testcase name="testEmptyPasswordFails" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="23" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.003549"/>
+    <testcase name="testWhitespaceOnlyPasswordFails" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="28" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.000127"/>
+    <testcase name="testTooShortPasswordFails" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="33" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.000101"/>
+    <testcase name="testBoundaryPasswordPasses" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="38" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.000305"/>
+    <testcase name="testValidStrongPasswordPasses" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="43" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.000102"/>
+    <testcase name="testValidWithSpecialCharactersPasses" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="48" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.000104"/>
+    <testcase name="testMaxBoundaryPasswordPasses" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="55" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.000103"/>
+    <testcase name="testTooLongPasswordFails" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="61" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.000104"/>
+    <testcase name="testExtremeMaxPasswordFails" file="C:\xampp\htdocs\quick_serve\tests\ChangePasswordTest.php" line="67" class="ChangePasswordTest" classname="ChangePasswordTest" assertions="1" time="0.000111"/>
   </testsuite>
 </testsuites>

@@ -27,7 +27,7 @@
     <label for="email">Email Address</label>
     <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($staff['email']); ?>" required>
 
-    <label for="phone">Phone Number</label>
+    <label for="phone">Phone Number (Optional)</label>
     <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($staff['phone'] ?? ''); ?>">
 
     <label for="profile_picture">Profile Picture</label>
@@ -35,13 +35,6 @@
     <?php if (!empty($staff['profile_picture'])): ?>
       <img src="/quick_serve/storage/uploads/<?php echo $staff['profile_picture']; ?>" alt="Profile Picture" class="profile-img">
     <?php endif; ?>
-
-    <label for="role">Role</label>
-    <select id="role" name="role" required>
-      <option value="Manager" <?php if ($staff['role'] === 'Manager') echo 'selected'; ?>>Manager</option>
-      <option value="Chef" <?php if ($staff['role'] === 'Chef') echo 'selected'; ?>>Chef</option>
-      <option value="Waiter" <?php if ($staff['role'] === 'Waiter') echo 'selected'; ?>>Waiter</option>
-    </select>
 
     <div class="form-actions">
       <button type="submit" class="btn">Save Changes</button>

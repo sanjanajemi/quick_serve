@@ -2,12 +2,8 @@
 
 namespace App\Controllers;
 
-require_once __DIR__ . '/../../libs/PHPMailer-master/src/PHPMailer.php';
-require_once __DIR__ . '/../../libs/PHPMailer-master/src/SMTP.php';
-require_once __DIR__ . '/../../libs/PHPMailer-master/src/Exception.php';
+//Staff interface uses this controller
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use App\Core\View;
 use App\Models\StaffModel;
 use App\Models\MenuModel;
@@ -18,6 +14,12 @@ use PDO;
 
 class StaffController
 {
+
+    /**
+     *Handles staff login request.
+     *Validates staff ID and password, authenticates user and redirects to dashboard.
+     *@return void
+     */
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -30,8 +32,11 @@ class StaffController
                 return;
             }
 
-            if (strlen($password) < 6) {
-                View::render('staff.login', ['error' => 'Password must be at least 6 characters long.']);
+            if (strlen($password) < 8) {
+                View::render('staff.login', ['error' => 'Password must be at least 8 characters long.']);
+                return;
+            } elseif (!preg_match('/[^a-zA-Z0-9]/', $password)) {
+                View::render('staff.login', ['error' => 'Password must include at least one special character.']);
                 return;
             }
 
@@ -51,6 +56,12 @@ class StaffController
         }
     }
 
+
+    /**
+     * Displays staff dashboard
+     * Requires staff login and loads staff <details class="
+     * @return void
+     */
     public function dashboard()
     {
         SessionHelper::requireStaffLogin();
@@ -59,6 +70,13 @@ class StaffController
         View::render('staff.dashboard', ['staff' => $staff]);
     }
 
+
+     /*  Read functionality */
+    /**
+     * Shows staff profile view
+     * Requires staff login
+     * @return void
+     */
     public function viewProfile()
     {
         SessionHelper::requireStaffLogin();
@@ -67,6 +85,12 @@ class StaffController
         View::render('staff.view_profile', ['staff' => $staff]);
     }
 
+
+     /* Edit Functionality */
+    /**
+     * Renders staff profile edit page
+     * @return void
+     */
     public function editProfile()
     {
         SessionHelper::requireStaffLogin();
@@ -74,52 +98,80 @@ class StaffController
         $staff = StaffModel::findById($staffId);
         View::render('staff.edit_profile', ['staff' => $staff]);
     }
+
+
+
+     /*  Backend validation for profile update */
+    /**
+     * Validates staff profile data and uploaded picture
+     * @param array $data Form data
+     * @param array $files Uploaded files
+     * @param string $currentPicture Current profile picture filename
+     * @return array [errors array, profile picture filename]
+     */
+
+    public function validateProfile($data, $files, $currentPicture)
+    {
+        $errors = [];
+        $validRoles = ['Manager', 'Chef', 'Waiter'];
+        $profilePicture = $currentPicture;
+
+
+        if (strlen($data['name']) < 3) {
+            $errors[] = 'Full Name must be at least 3 characters long.';
+        } 
+        elseif (strlen($data['name']) > 25) {
+            $errors[] = 'Full Name must not exceed 25 characters.';
+        } 
+        elseif (!preg_match('/^[A-Za-z\s]+$/', $data['name'])) {
+            $errors[] = 'Full Name must contain only letters and spaces.';
+        }
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Invalid email address.';
+        }
+
+        if (!empty($data['phone']) && !preg_match('/^\d{10}$/', $data['phone'])) {
+            $errors[] = '❌ Phone number must be exactly 10 digits (no spaces or symbols).';
+        }
+
+    
+
+        if (!empty($files['profile_picture']['name'])) {
+            $filename = basename($files['profile_picture']['name']);
+            $targetPath = __DIR__ . '/../../storage/uploads/' . $filename;
+
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!in_array($files['profile_picture']['type'], $allowedTypes)) {
+                $errors[] = 'Profile picture must be a JPG or PNG image.';
+            } elseif (move_uploaded_file($files['profile_picture']['tmp_name'], $targetPath)) {
+                $profilePicture = $filename;
+            }
+        }
+        return [$errors, $profilePicture];
+    }
+
+
+
+    /*Edit Functionality */
+    /**
+     * Updtaes staff profile with validated data
+     * @return void
+     */
     public function updateProfile()
     {
         SessionHelper::requireStaffLogin();
         $staffId = $_SESSION['staff_id'];
         $staff = StaffModel::findById($staffId);
 
-        $name = trim($_POST['name'] ?? '');
-        $email = trim($_POST['email'] ?? '');
-        $phone = trim($_POST['phone'] ?? '');
-        $role = $_POST['role'] ?? '';
-        $profilePicture = $staff['profile_picture'];
+        $data = [
+            'name' => trim($_POST['name'] ?? ''),
+            'email' => trim($_POST['email'] ?? ''),
+            'phone' => trim($_POST['phone'] ?? ''),
+            'role' => $_POST['role'] ?? ''
+        ];
 
-        //  Backend validation
-        $validRoles = ['Manager', 'Chef', 'Waiter'];
-        $errors = [];
+        [$errors, $profilePicture] = $this->validateProfile($data, $_FILES, $staff['profile_picture']);
 
-        if (!preg_match('/^[A-Za-z\s]+$/', $name)) {
-            $errors[] = 'Full Name must contain only letters and spaces.';
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = 'Invalid email address.';
-        }
-
-       if (!empty($phone) && !preg_match('/^\d{10}$/', $phone)) {
-       $errors[] = '❌ Phone number must be exactly 10 digits (no spaces or symbols).';
-       }
-
-        if (!in_array($role, $validRoles)) {
-            $errors[] = 'Invalid role selected.';
-        }
-
-        if (!empty($_FILES['profile_picture']['name'])) {
-            $filename = basename($_FILES['profile_picture']['name']);
-            $targetPath = __DIR__ . '/../../storage/uploads/' . $filename;
-
-            //  validate file type
-            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            if (!in_array($_FILES['profile_picture']['type'], $allowedTypes)) {
-                $errors[] = 'Profile picture must be a JPG or PNG image.';
-            } elseif (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetPath)) {
-                $profilePicture = $filename;
-            }
-        }
-
-        //  re-render the form with error messages
         if (!empty($errors)) {
             View::render('staff.edit_profile', [
                 'staff' => $staff,
@@ -128,12 +180,11 @@ class StaffController
             return;
         }
 
-        //  Save valid data
         StaffModel::update($staffId, [
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'role' => $role,
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'role' => $data['role'],
             'profile_picture' => $profilePicture
         ]);
 
@@ -141,6 +192,13 @@ class StaffController
         exit;
     }
 
+
+    /*  Edit Functionality */
+    /**
+     * Change staff account password
+     * Validates current password, matches new password twice and updates if it's valid.
+     * @return void
+     */
     public function changePassword()
     {
         SessionHelper::requireStaffLogin();
@@ -177,6 +235,13 @@ class StaffController
         ]);
     }
 
+
+     /*   Delete Functionality */
+    /**
+     * Schedule staff account deletion
+     * Marks deletion time in session and shows confirmation view
+     * @return void
+     */
     public function deleteAccount()
     {
         SessionHelper::requireStaffLogin();
@@ -184,6 +249,12 @@ class StaffController
         View::render('staff.delete_account');
     }
 
+
+    /**
+     * Finalize staff account deletion
+     * Deletes account after a 5-minute waiting period otherwis
+     * @return void
+     */
     public function deleteAccountFinal()
     {
         SessionHelper::requireStaffLogin();
@@ -200,6 +271,11 @@ class StaffController
         }
     }
 
+    /**
+     * Cancel scheduled account deletion
+     * Removes deletion mark from session and redirects to dashboard
+     * @return void
+     */
     public function cancelDeletion()
     {
         unset($_SESSION['delete_scheduled_at']);
@@ -207,6 +283,12 @@ class StaffController
         exit;
     }
 
+
+    /**
+     * Logs out staff user
+     * Destroys session and redirects to login page
+     * @return void
+     */
     public function logout()
     {
         session_destroy();
@@ -214,7 +296,14 @@ class StaffController
         exit;
     }
 
-    // Menu Management
+    // Menu Management By Staff
+
+
+    /**
+     * Displays all menu items to staff 
+     * Requires staff login and renders menu list
+     * @return void
+     */
 
     public function menu()
     {
@@ -223,6 +312,13 @@ class StaffController
         $menuItems = $menuModel->getAllItems();
         View::render('staff.menu_list', ['menuItems' => $menuItems]);
     }
+
+
+    /**
+     * Publishes a menu item by ID
+     * Validates ID, checks item status and updates to published
+     * @return void
+     */
 
     public function publishMenu()
     {
@@ -255,6 +351,12 @@ class StaffController
         exit;
     }
 
+    /**
+     * Unpublishes a menu item by $id
+     * Validates ID, checks item status and updates to unpublished
+     * @return void
+     */
+
     public function unpublishMenu()
     {
         SessionHelper::requireStaffLogin();
@@ -285,6 +387,4 @@ class StaffController
         header('Location: /quick_serve/staff/menu?success=unpublished');
         exit;
     }
-
-
 }

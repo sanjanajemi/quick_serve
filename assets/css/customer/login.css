@@ -1,16 +1,15 @@
-/* 🌿 Cream and Green Login Page */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #fdf6e3; /* Cream background */
+  background-color: #fdf6e3; 
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-/* 📦 Login Card */
+
 main {
   background: #ffffff;
   padding: 40px 30px;
@@ -21,14 +20,14 @@ main {
   text-align: center;
 }
 
-/* 📝 Heading */
+
 main h2 {
   margin-bottom: 30px;
   font-size: 24px;
-  color: #2e8b57; /* Forest green */
+  color: #2e8b57; 
 }
 
-/* 🔐 Input Fields */
+
 form input[type="email"],
 form input[type="password"] {
   width: 100%;
@@ -46,7 +45,7 @@ form input:focus {
   outline: none;
 }
 
-/* 🚪 Submit Button */
+
 form button[type="submit"] {
   width: 100%;
   padding: 12px;
@@ -64,14 +63,14 @@ form button[type="submit"]:hover {
   background-color: #228b22;
 }
 
-/* ❌ Error Message */
+
 .error {
   color: #c0392b;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
-/* 🔗 Links */
+
 main a {
   display: inline-block;
   margin-top: 10px;

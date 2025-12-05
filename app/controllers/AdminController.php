@@ -1,5 +1,6 @@
 <?php
 
+//Admin interface uses this controller
 namespace App\Controllers;
 
 use App\Core\View;
@@ -15,10 +16,7 @@ class AdminController
     // Admin Login
     public function login()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
+       
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminId = $_POST['admin_id'];
             $password = $_POST['password'];
@@ -38,6 +36,7 @@ class AdminController
         }
     }
 
+ 
     // Logout Admin
     public function logout()
     {
@@ -146,13 +145,18 @@ class AdminController
         $errors = [];
 
         // Validate input
-        if (empty($data['name'])) {
-            $errors[] = "Name is required.";
-        }
+       if (empty($data['name'])) {
+    $errors[] = "Name is required.";
+    } elseif (!preg_match("/^[\p{L}\s]+$/u", $data['name'])) {
+     $errors[] = "Invalid name: only letters allowed.";
+    }
 
-        if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "A valid email is required.";
-        }
+       if (empty($data['email'])) {
+    $errors[] = "Email is required.";
+} elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Invalid email format.";
+}
+
 
         // If validation fails, re-render the form with errors and old input
         if ($errors) {
@@ -236,15 +240,16 @@ class AdminController
 
     // Validate input
     if (empty($data['name'])) {
-        $errors[] = "Name is required.";
+        $errors[] = "Invalid name: only letters allowed.";
     }
 
     if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
         $errors[] = "A valid email is required.";
     }
-
-    if (empty($data['password']) || strlen($data['password']) < 6) {
-        $errors[] = "Password must be at least 6 characters.";
+    if (empty($data['password'])) {
+    $errors[] = "Password is required.";
+    } elseif (strlen($data['password']) < 6) {
+    $errors[] = "Password must be at least 6 characters.";
     }
 
     //  If validation fails, re-render profile with errors
@@ -372,7 +377,7 @@ if ($success) {
     exit;
 }
 
-echo "❌ Failed to create staff. Please try again.";
+echo " Failed to create staff. Please try again.";
 exit;}
 
     //  Show Edit Staff Form
@@ -547,29 +552,52 @@ exit;}
 
         View::render('admin.menu_edit', ['item' => $item]);
     }
+public function menuUpdate()
+{
+    $this->requireAdmin();
+    $id     = $_POST['id'] ?? null;
+    $data   = $_POST;
+    $errors = [];
 
-    public function menuUpdate()
-    {
-        $this->requireAdmin();
-        $id = $_POST['id'] ?? null;
-        $data = $_POST;
-        $errors = [];
+    // basic validation
+    if (empty($data['name'])) $errors[] = "Name is required.";
+    if (!is_numeric($data['price']) || $data['price'] <= 0) $errors[] = "Price must be positive.";
+    if (!in_array($data['status'], ['published','unpublished'])) $errors[] = "Invalid status.";
 
-        if (empty($data['name'])) $errors[] = "Name is required.";
-        if (!is_numeric($data['price']) || $data['price'] <= 0) $errors[] = "Price must be positive.";
-        if (!in_array($data['status'], ['published', 'unpublished'])) $errors[] = "Invalid status.";
+    $menuModel = new MenuModel();
+    $existing  = $menuModel->findById((int)$id);
 
-        if ($errors) {
-            $data['menu_item_id'] = $id;
-            View::render('admin.menu_edit', ['errors' => $errors, 'item' => $data]);
-            return;
+    // keep old image by default
+    $data['image_url'] = $existing['image_url'];
+
+    // upload new image if provided
+    if (!empty($_FILES['image_file']['name'])) {
+        $uploadDir = __DIR__ . '/../../public/uploads/menu/';
+        if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+
+        $filename   = time().'_'.basename($_FILES['image_file']['name']);
+        $targetFile = $uploadDir.$filename;
+
+        if (move_uploaded_file($_FILES['image_file']['tmp_name'], $targetFile)) {
+            // save relative path for browser access
+            $data['image_url'] = "/uploads/menu/".$filename;
+        } else {
+            $errors[] = "Image upload failed.";
         }
-
-        $menuModel = new MenuModel();
-        $menuModel->update((int)$id, $data);
-        header('Location: /quick_serve/admin/menu');
-        exit;
     }
+
+    // if errors, re-render form
+    if ($errors) {
+        $data['menu_item_id'] = $id;
+        View::render('admin.menu_edit', ['errors'=>$errors,'item'=>$data]);
+        return;
+    }
+
+    // update and redirect
+    $menuModel->update((int)$id, $data);
+    header('Location: /quick_serve/admin/menu');
+    exit;
+}
 
     public function menuDelete()
     {
@@ -747,24 +775,35 @@ exit;}
     }
 
 
-    public function customerView()
-    {
-        $this->requireAdmin();
+   public function customerView()
+{
+    $this->requireAdmin();
 
-        $customerId = isset($_GET['id']) ? (int)$_GET['id'] : null;
-        if (!$customerId) {
-            View::render('errors/404');
-            return;
-        }
-
-        $customer = CustomerModel::getCustomerById($customerId);
-        if (!$customer) {
-            View::render('errors/404');
-            return;
-        }
-
-        View::render('admin.customer_view', ['customer' => $customer]);
+    // Get customer ID from query string
+    $customerId = isset($_GET['id']) ? (int)$_GET['id'] : null;
+    if (!$customerId) {
+        View::render('errors/404');
+        return;
     }
+
+    // Fetch customer from database
+    $customer = CustomerModel::getCustomerById($customerId);
+    if (!$customer) {
+        View::render('errors/404');
+        return;
+    }
+
+    // Pass customer data to the view (without status validation)
+    View::render('admin.customer_view', [
+        'customer' => [
+            'customer_id' => $customer['customer_id'],
+            'name'        => $customer['name'],
+            'email'       => $customer['email'],
+            // deliberately not passing account_status to avoid validation error
+            'orders'      => $customer['orders'] ?? []
+        ]
+    ]);
+}
 
 
     public function customerDetailOverview()

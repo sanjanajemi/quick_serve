@@ -13,7 +13,7 @@ return [
     // Database configuration
     'db' => [
         'host' => 'localhost',
-        'name' => 'brock_cafe', // or 'quick_serve_db' if that's correct
+        'name' => 'brock_cafe', 
         'user' => 'root',
         'pass' => '',
         'charset' => 'utf8mb4',

@@ -1,109 +1,159 @@
-/* Base layout styles */
+/* Base layout */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
   margin: 30px;
-  background-color: #f9f9f9;
+  background-color: #f4f7f9;
+  color: #333;
 }
 
 /* Page heading */
 h2 {
-  color: #333;
-  margin-bottom: 20px;
+  color: #003B5C;
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-/* Top bar container (search + button) */
+/* Top bar (search + dashboard button) */
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap; /* allows mobile wrapping */
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* Search field */
+/* Search input */
 .search-input {
   flex: 1;
-  min-width: 250px;
-  padding: 10px;
+  min-width: 260px;
+  padding: 10px 14px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 /* Dashboard button */
 .dashboard-button {
-  padding: 10px 16px;
-  background-color: #2ecc71;
+  padding: 10px 18px;
+  background-color: #00bcd4;;
   color: white;
   text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  margin-left: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease;
 }
 
 .dashboard-button:hover {
-  background-color: #27ae60;
+  background-color: #3572c1;
 }
 
-/* Card wrapper for each customer */
+/* Customer card */
 .customer-card {
-  background: #fff;
-  padding: 20px;
+  background: #ffffff;
+  padding: 20px 24px;
   margin-bottom: 40px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-h3 {
-  color: #333;
+.customer-card h3 {
+  color: #003B5C;
   margin-top: 0;
+  font-size: 22px;
+  margin-bottom: 8px;
 }
 
-/* Table styles */
+.customer-card p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+/* Table (order history) */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
-table th, table td {
-  padding: 10px;
-  border: 1px solid #ddd;
+table th {
+  background-color: #e8f0fe;
+  color: #003B5C;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
 }
 
-/* Action buttons (edit/delete) */
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 15px;
+}
+
+/* Action buttons */
 .actions a {
   margin-right: 10px;
-  padding: 6px 12px;
-  background-color: #007bff;
+  padding: 8px 14px;
+  background-color: #1a73e8;
   color: white;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-weight: 600;
   display: inline-block;
-}
-
-.actions a.delete {
-  background-color: #dc3545;
+  transition: background-color 0.2s ease;
 }
 
 .actions a:hover {
-  opacity: 0.9;
+  background-color: #0b5fcc;
 }
 
+.actions a.delete {
+  background-color: #d93025;
+}
 
-/* RESPONSIVE FIXES */
+.actions a.delete:hover {
+  background-color: #c5221f;
+}
 
+/* Status badge */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
 
+.status-active {
+  background-color: #34a853; /* green */
+}
+
+.status-inactive {
+  background-color: #fbbc05; /* amber */
+}
+
+/* No results message */
+.no-results {
+  color: #d93025;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
-  /* Reduce body margin on tablets */
   body {
     margin: 15px;
   }
 
-  /* Stack search + button on top of each other */
   .top-bar {
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
   }
 
   .dashboard-button {
@@ -113,13 +163,11 @@ table th, table td {
 }
 
 @media (max-width: 500px) {
-  /* Improve readability on very small devices */
   table th, table td {
-    padding: 8px;
+    padding: 10px;
     font-size: 14px;
   }
 
-  /* Make action buttons full width on small screens */
   .actions a {
     display: block;
     margin-bottom: 8px;

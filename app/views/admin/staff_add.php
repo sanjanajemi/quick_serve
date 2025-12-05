@@ -22,8 +22,10 @@
     <input type="password" name="password" placeholder="Password" required>
     <input type="file" name="profile_picture">
     <button type="submit">Add Staff</button>
+    
   </form>
-
+    <a href="/quick_serve/admin/staff/list" class="back-link">← Back to Staff List</a>
+   
    <script src="\quick_serve\assets\js\admin\staff_add.js"></script>
 </body>
 </html>

@@ -1,162 +1,152 @@
-/* ---------------------------------------------------------
-   GLOBAL BACKGROUND (matches menu, cart, order-start pages)
---------------------------------------------------------- */
+
 .global-bg {
     position: fixed;
     inset: 0;
-    background: url("/quick_serve/assets/images/customer/hero1.png");
-    z-index: -2;
+    background-image: url('/quick_serve/assets/images/customer/hero1.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -10;
 }
 
 .global-bg-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: -1;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    z-index: -9;
 }
 
-/* ---------------------------------------------------------
-   PAGE WRAPPER
---------------------------------------------------------- */
+
 .receipt-container {
-    max-width: 700px;
-    margin: 100px auto;
-    background: #ffffffdd;
-    backdrop-filter: blur(8px);
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-    animation: fadeIn 0.4s ease-in-out;
+    max-width: 750px;
+    margin: 120px auto;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 35px rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.35s ease-out;
 }
 
-/* Fade animation */
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------------------------------------------------------
-   RECEIPT HEADER
---------------------------------------------------------- */
-.receipt-header {
-    text-align: center;
+
+.receipt-card h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+    background: linear-gradient(90deg, #1a73e8, #0abf66);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.subtitle {
+    color: #2c2c2c;
+    font-size: 16px;
     margin-bottom: 25px;
 }
 
-.receipt-header h1 {
-    font-size: 28px;
-    color: #fff;
-    margin-bottom: 10px;
-}
 
-.receipt-header h2 {
-    font-size: 24px;
-    color: #222;
-    font-weight: bold;
-}
-
-/* ---------------------------------------------------------
-   RECEIPT DETAILS
---------------------------------------------------------- */
-.receipt-details {
-    background: #f7f7f7;
+.order-info {
+    background: rgba(26, 115, 232, 0.08);
+    border-left: 5px solid #1a73e8;
     border-radius: 10px;
-    padding: 20px;
+    padding: 18px 22px;
     margin-bottom: 25px;
-    line-height: 1.6;
+    font-size: 16px;
+    color: #003d66;
+    line-height: 1.7;
+}
+
+.order-info strong {
+    color: #0c3554;
+}
+
+
+.receipt-items {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e3e8ec;
     font-size: 16px;
 }
 
-.receipt-details strong {
-    color: #222;
-    font-weight: 600;
+.receipt-item:last-child {
+    border-bottom: none;
 }
 
-/* ---------------------------------------------------------
-   ORDER ITEMS TABLE
---------------------------------------------------------- */
-.receipt-items-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 25px;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
+.receipt-item span {
+    color: #333;
 }
 
-.receipt-items-table th,
-.receipt-items-table td {
-    padding: 12px 15px;
+.receipt-item strong {
+    color: #0abf66;
+    font-size: 17px;
 }
 
-.receipt-items-table th {
-    background: #333;
-    color: #fff;
-    text-align: left;
-}
 
-.receipt-items-table tr:nth-child(even) {
-    background: #f3f3f3;
-}
-
-.receipt-items-table tr:nth-child(odd) {
-    background: #ffffff;
-}
-
-/* ---------------------------------------------------------
-   TOTAL AMOUNT
---------------------------------------------------------- */
 .receipt-total {
     text-align: right;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #111;
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a73e8;
 }
 
-/* ---------------------------------------------------------
-   ACTION BUTTONS
---------------------------------------------------------- */
+
 .receipt-actions {
+    margin-top: 35px;
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
-    gap: 10px;
+    gap: 12px;
 }
 
+
 .btn {
-    display: inline-block;
-    padding: 12px 20px;
-    background: #ffcc00;
-    color: #000;
-    border-radius: 8px;
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
     text-align: center;
-    font-weight: bold;
-    transition: 0.2s;
+    font-size: 16px;
+    font-weight: 700;
     text-decoration: none;
+    color: #fff;
+    background: linear-gradient(90deg, #1a73e8, #0abf66);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: 0.25s;
 }
 
 .btn:hover {
-    background: #e6b800;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.22);
 }
+
 
 .btn.secondary {
     background: #333;
-    color: #fff;
 }
 
 .btn.secondary:hover {
     background: #222;
 }
 
-/* ---------------------------------------------------------
-   PRINT / DOWNLOAD BUTTON
---------------------------------------------------------- */
+
 .btn.download {
-    background: #0077ff;
-    color: #fff;
+    background: #1a73e8;
 }
 
 .btn.download:hover {
-    background: #005fcc;
+    background: #155fcc;
 }

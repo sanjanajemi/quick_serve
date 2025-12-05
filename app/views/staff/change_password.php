@@ -35,8 +35,6 @@
       <button type="submit" class="btn">Update Password</button>
     </form>
   </main>
-
   
- <script src="\quick_serve\app\views\staff\change_password.js"></script>
-</body>
+<script src="/quick_serve/app/views/staff/change_password.js"></script></body>
 </html>

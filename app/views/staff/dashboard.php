@@ -10,7 +10,11 @@
 
 <body>
   <header>
+    <div class="brand">
+    <img src= "\quick_serve\assets\images\staff\staff.jpg" alt="Brock Café Logo" class="brand-logo">
     <h1 style="color: #f5f7fa;">Staff Dashboard</h1>
+    </div>
+    
     <nav>
       <button onclick="toggleDarkMode()" class="toggle-btn">Toggle Dark Mode</button>
       <a href="/quick_serve/staff/logout">Logout</a>

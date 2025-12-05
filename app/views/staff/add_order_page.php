@@ -59,25 +59,35 @@
           <input type="email" id="searchCustomerEmail" placeholder="Enter customer email">
           <button type="button" onclick="searchCustomer()">Search</button>
         </div>
-        <small id="customerSearchError" style="color:red; display:none;">
+        <small id="customerSearchError" class="error-msg">
           No customer found with that email.
         </small>
 
         <!-- Customer Details -->
         <h3>Customer Details</h3>
+
         <label>Customer Name</label>
         <input type="text" name="customer_name" required>
+        <small id="nameError" class="error-msg">
+          Name must contain only letters and spaces.
+        </small>
 
         <label>Customer Email</label>
         <input type="email" name="customer_email" required>
-
+        <small id="emailError" class="error-msg">
+          Invalid email address format.
+        </small>
         <!-- Order Comments -->
         <label>Comments</label>
         <input type="text" name="comments" id="comments" maxlength="200">
-        <small id="commentError" style="color:red; display:none;">
+        <small id="commentError" class="error-msg">
           Invalid characters detected. Only letters, numbers, spaces, and basic punctuation are allowed.
         </small>
 
+        <div id="cartError" class="error-msg">
+          Cart cannot be empty. Please add at least one item.
+        </div>
+        
         <!-- Final Amount -->
         <label>Total Amount</label>
         <input type="number" step="0.01" name="final_amount" id="finalAmount" readonly>
@@ -88,6 +98,7 @@
   </div>
 
   <script src="\quick_serve\app\views\staff\add_order_page.js"></script>
+  <script src="/quick_serve/assets/js/staff/add_order_validation.js"></script>
 
 </body>
 

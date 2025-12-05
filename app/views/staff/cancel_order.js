@@ -1,3 +1,9 @@
+/**
+ * Cancel an order by its ID
+ * Shows cancellation pop up and email sending status
+ * @param {number} orderId  identifier for the order
+ */
+
 function cancelOrder(orderId) {
   if (!confirm(`Are you sure you want to cancel order #${orderId}?`)) {
     return;
@@ -28,7 +34,11 @@ function cancelOrder(orderId) {
   });
 }
 
-// Simple toast popup
+/**
+ * Display a temporary toast pop up message
+ * Creates a styled div element, appends it to the DOM and automatically removes it after 3 seconds
+ * @param {string} message- The message to display in the toast
+ */
 function showToast(message) {
   const toast = document.createElement('div');
   toast.className = 'toast';

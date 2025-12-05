@@ -7,7 +7,7 @@ use App\Core\Database;
 
 $pdo = Database::connect();
 
-// Validate order_id
+
 $orderId = $_GET['order_id'] ?? null;
 
 if (!$orderId) {
@@ -15,7 +15,7 @@ if (!$orderId) {
     exit;
 }
 
-// Fetch order
+
 $stmt = $pdo->prepare("SELECT * FROM `order` WHERE order_id = ?");
 $stmt->execute([$orderId]);
 $order = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -25,7 +25,7 @@ if (!$order) {
     exit;
 }
 
-// Fetch items
+
 $stmtItems = $pdo->prepare("
     SELECT oi.quantity, oi.unit_price, oi.total_price, mi.name
     FROM order_item oi
@@ -50,7 +50,7 @@ $items = $stmtItems->fetchAll(PDO::FETCH_ASSOC);
     <button class="go-back-btn" onclick="history.back()">← Go Back</button>
 
 
-    <!-- 🔥 GLOBAL BACKGROUND (you asked to include this!) -->
+    
     <div class="global-bg"></div>
     <div class="global-bg-overlay"></div>
 

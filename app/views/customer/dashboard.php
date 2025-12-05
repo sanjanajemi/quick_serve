@@ -11,11 +11,12 @@ if (!isset($_SESSION['customer_id'])) {
 
 $customerName   = htmlspecialchars($_SESSION['customer_name']);
 $customerAvatar = $_SESSION['customer_avatar'] ?? 'default.png';
+$cartCount = 0;
+if (!empty($_SESSION['cart'])) {
+    $cartCount = array_sum(array_column($_SESSION['cart'], 'quantity'));
+}
 
-// Cart count for badge (uses the real cart)
-$cartCount = array_sum(array_column($_SESSION['cart'] ?? [], 'quantity'));
 
-// Fetch deals
 $pdo = Database::connect();
 $stmt = $pdo->prepare("SELECT * FROM menu_item WHERE is_deal = 1 ORDER BY name");
 $stmt->execute();
@@ -37,41 +38,16 @@ $deals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="global-bg"></div>
 <div class="global-bg-overlay"></div>
 
-<!-- CART ICON (same behaviour as menu page) -->
-<div class="cart-icon" id="openCart">
-    🛒 <span id="cart-count"><?= $cartCount ?></span>
-</div>
 
-<!-- CART DRAWER (same structure as menu page) -->
-<div class="cart-drawer" id="cartDrawer">
 
-    <div class="cart-overlay" id="closeCart"></div>
 
-    <div class="cart-panel">
-        <h2>Your Cart</h2>
 
-        <div class="cart-items" id="cartItems"></div>
 
-        <div class="cart-footer">
-            <button class="btn continue-btn" type="button" id="continueShopping">
-                ← Continue Shopping
-            </button>
-
-            <strong>Total:</strong> <span id="cartTotal">0 DKK</span>
-
-            <button class="btn checkout-btn" type="button" id="goCheckout">
-                Proceed to Checkout
-            </button>
-        </div>
-    </div>
-</div>
-
-<!--TOPBAR  -->
 <div class="topbar">
     <div class="top-left">
         <img src="/quick_serve/assets/images/logo/logo.png" class="topbar-logo" alt="Logo">
 
-        <!-- Menu Dropdown -->
+        
         <div class="dropdown">
             <button type="button"
                     class="nav-btn dropbtn"
@@ -85,7 +61,7 @@ $deals = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
-        <!-- Settings Dropdown -->
+       
         <div class="dropdown">
             <button type="button" class="nav-btn dropbtn" onclick="toggleDropdown('settingsDropdown')">
                 ⚙️ Settings ▾
@@ -104,43 +80,49 @@ $deals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="top-right">
         <span>Hello, <?= $customerName ?> 👋</span>
         <img src="/quick_serve/storage/uploads/<?= $customerAvatar ?>" class="avatar" alt="Avatar">
-        <!-- The cart icon is already positioned globally via .cart-icon -->
+        
     </div>
 </div>
 
-<!--  HERO -->
+
 <div id="hero-section" class="hero-content">
     <h1 class="hero-title">Welcome back<br>Brock Café</h1>
     <p class="hero-subtitle">Your favourites, your orders, your deals — all in one place</p>
     <br><a href="/quick_serve/app/views/customer/menu_item.php" class="cta-btn">Start an Order</a></br>
 </div>
 
-<!--  DEALS SECTION (uses real menu_item deals)  -->
+
 <div id="deals-section" class="deals-section">
     <h2 class="deals-title">🔥 Special Deals for You</h2>
+     <?php foreach ($deals as $deal): ?>
+    <div class="deal-card" onclick="toggleDeal(<?= $deal['menu_item_id'] ?>)">
+        <img src="<?= htmlspecialchars($deal['image_url']) ?>" 
+             alt="<?= htmlspecialchars($deal['name']) ?>">
 
-    <?php foreach ($deals as $deal): ?>
-        <div class="deal-card" onclick="toggleDeal('deal<?= $deal['menu_item_id'] ?>')">
-            <img src="<?= htmlspecialchars($deal['image_url']) ?>" alt="<?= htmlspecialchars($deal['name']) ?>">
-            <div class="deal-card-title"><?= htmlspecialchars($deal['name']); ?></div>
+        <div class="deal-card-title"><?= htmlspecialchars($deal['name']); ?></div>
 
-            <div class="deal-dropdown" id="deal-deal<?= $deal['menu_item_id'] ?>">
-                <p><?= htmlspecialchars($deal['description']); ?></p>
+        <div class="deal-dropdown" id="deal<?= $deal['menu_item_id'] ?>">
+            <p><?= htmlspecialchars($deal['description']); ?></p>
 
-                <!-- EXACT SAME PATTERN AS MENU PAGE: POST -> /customer/cart/add -->
-                <form method="POST"
-                      action="/quick_serve/customer/cart/add"
-                      class="add-to-cart-form">
-                    <input type="hidden" name="menu_item_id" value="<?= $deal['menu_item_id'] ?>">
-                    <input type="hidden" name="quantity" value="1">
-                    <button class="btn" type="submit">Add to Cart</button>
-                </form>
-            </div>
+            <form method="POST"
+                  action="/quick_serve/customer/cart/add"
+                  class="add-to-cart-form"
+                  onclick="event.stopPropagation()">
+
+                <input type="hidden" name="menu_item_id" value="<?= $deal['menu_item_id'] ?>">
+                <input type="hidden" name="quantity" value="1">
+               <button class="btn" type="submit" onclick="event.stopPropagation()">
+                Add to Cart
+            </button>
+        </form> 
         </div>
-    <?php endforeach; ?>
+    </div>
+<?php endforeach; ?>
+
+    
 </div>
 
-<!-- DELETE ACCOUNT POPUP (unchanged) -->
+
 <div id="deletePopup" class="delete-modal">
     <div class="delete-box">
         <h2 id="popupTitle">Are you absolutely sure?</h2>
@@ -162,25 +144,22 @@ $deals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <script>
-/* 
-   DROPDOWNS
-*/
+document.addEventListener("DOMContentLoaded", function() {
+
 function toggleDropdown(id) {
     const el = document.getElementById(id);
     if (!el) return;
     el.style.display = (el.style.display === 'block') ? 'none' : 'block';
 }
 
-/* 
-   DELETE ACCOUNT POPUP
-*/
-function openDeletePopup() {
+
+window.openDeletePopup = function() {
     document.getElementById("deletePopup").style.display = "flex";
     document.getElementById("hero-section").classList.add("blur-background");
     document.getElementById("deals-section").classList.add("blur-background");
 }
 
-function cancelDelete() {
+window.cancelDelete = function() {
     document.getElementById("deletePopup").style.display = "none";
     document.getElementById("hero-section").classList.remove("blur-background");
     document.getElementById("deals-section").classList.remove("blur-background");
@@ -189,7 +168,7 @@ function cancelDelete() {
 let countdown = 30;
 let timer;
 
-function startCountdown() {
+window.startCountdown = function() {
     document.getElementById("popupTitle").textContent = "Deleting your account in...";
     document.getElementById("popupText").textContent = "You can still cancel before time runs out.";
     document.getElementById("timerDisplay").style.display = "block";
@@ -207,104 +186,49 @@ function startCountdown() {
     }, 1000);
 }
 
-/* 
-   DEAL DROPDOWNS
- */
-function toggleDeal(id) {
-    const dropdown = document.getElementById("deal-" + id);
-    if (!dropdown) return;
-    dropdown.classList.toggle("open");
-}
-
-/* 
-   ADD TO CART (same as menu page)
- */
 document.querySelectorAll('.add-to-cart-form').forEach(form => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const data = new FormData(form);
+        await fetch(form.action, { method: "POST", body: data });
 
-        const res = await fetch(form.action, {
-            method: "POST",
-            body: data
-        });
+        showAddedPopup();
 
-        const json = await res.json();
+        setTimeout(() => {
+    window.location.href = "/quick_serve/app/views/customer/menu_item.php?open_cart=1";
+}, 1500);
 
-        // Update badge
-        if (json.count !== undefined && document.getElementById("cart-count")) {
-            document.getElementById("cart-count").textContent = json.count;
-        }
-
-        loadCart();
     });
 });
 
-/* 
-   LOAD CART
- */
-async function loadCart() {
-    const res = await fetch("/quick_serve/customer/cart/items");
-    const data = await res.json();
+function showAddedPopup() {
+    const popup = document.createElement("div");
+    popup.innerHTML = "✔ Item added to cart! Redirecting…";
+    popup.style.position = "fixed";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
+    popup.style.background = "#4CAF50";
+    popup.style.color = "#fff";
+    popup.style.padding = "15px 20px";
+    popup.style.borderRadius = "10px";
+    popup.style.fontSize = "18px";
+    popup.style.zIndex = "9999";
+    popup.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+    document.body.appendChild(popup);
 
-    document.getElementById("cartItems").innerHTML = data.html;
-    document.getElementById("cartTotal").textContent = data.total.toFixed(2) + " DKK";
-
-    if (data.count !== undefined && document.getElementById("cart-count")) {
-        document.getElementById("cart-count").textContent = data.count;
-    }
+    setTimeout(() => popup.remove(), 1500);
 }
 
-/* 
-   UPDATE QUANTITY
- */
-async function updateCart(id, action) {
-    await fetch("/quick_serve/customer/cart/update", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `menu_item_id=${id}&action=${action}`
-    });
-
-    loadCart();
-}
-
-/* 
-   REMOVE FROM CART
-*/
-async function removeFromCart(id) {
-    await fetch("/quick_serve/customer/cart/remove", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `menu_item_id=${id}`
-    });
-
-    loadCart();
-}
-
-/* 
-   CART DRAWER OPEN/CLOSE
- */
-document.getElementById("openCart").onclick = () => {
-    document.getElementById("cartDrawer").classList.add("open");
-    loadCart();
+window.toggleDeal = function(id) {
+    const el = document.getElementById("deal" + id);
+    if (el) el.classList.toggle("open");
 };
 
-document.getElementById("closeCart").onclick = () => {
-    document.getElementById("cartDrawer").classList.remove("open");
-};
-
-document.getElementById("continueShopping").onclick = () => {
-    document.getElementById("cartDrawer").classList.remove("open");
-};
-
-/* 
-   CHECKOUT (uses your controller)
- */
-document.getElementById("goCheckout").onclick = () => {
-    window.location.href = "/quick_serve/customer/order_start";
-};
+});
 </script>
+
 
 </body>
 </html>

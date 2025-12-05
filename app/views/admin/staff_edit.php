@@ -4,14 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit Profile</title>
-  <link rel="stylesheet" href="/quick_serve/assets/css/admin/staff_edit.css" />
+<link rel="stylesheet" href="/quick_serve/assets/css/admin/staff_edit.css?v=5" />
 </head>
 
 <body>
 
+ <div class="edit-profile-card">
   <form action="/quick_serve/admin/staff/update" method="POST" enctype="multipart/form-data">
     <h2>Edit Profile</h2>
- <input type="hidden" name="id" value="<?= isset($staff['staff_id']) ? htmlspecialchars($staff['staff_id']) : '' ?>">
+
+    
+    <input type="hidden" name="id" value="<?= isset($staff['staff_id']) ? htmlspecialchars($staff['staff_id']) : '' ?>">
+    <label for="name">Name</label>
     <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($staff['name']); ?>" required>
 
     <label for="email">Email Address</label>
@@ -23,7 +27,7 @@
     <label for="profile_picture">Profile Picture</label>
     <input type="file" id="profile_picture" name="profile_picture">
     <?php if (!empty($staff['profile_picture'])): ?>
-      <img src="/quick_serve/storage/uploads/<?php echo $staff['profile_picture']; ?>" alt="Profile Picture">
+      <img src="/quick_serve/storage/uploads/<?php echo $staff['profile_picture']; ?>" alt="Profile Picture" class="profile-img">
     <?php endif; ?>
 
     <label for="role">Role</label>
@@ -33,10 +37,15 @@
       <option value="Waiter" <?php if ($staff['role'] === 'Waiter') echo 'selected'; ?>>Waiter</option>
     </select>
 
-<div style="display: flex; gap: 10px;">
-  <button type="submit">Save Changes</button>
-  <a href="/quick_serve/admin/staff/list" class="cancel-button">Cancel</a>
+    <div class="form-actions">
+      <button type="submit" class="btn">Save Changes</button>
+      <a href="/quick_serve/admin/staff/list" class="btn cancel-btn">Cancel</a>
+    </div>
+  </form>
 </div>
+
+<div class="back-button">
+  <a href="/quick_serve/admin/staff/list" class="back-link">← Back to Staff List</a>
   </form>
 
   <script src="\quick_serve\assets\js\admin\staff_edit.js"></script>

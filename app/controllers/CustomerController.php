@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+//Customer inteface uses this controller
+
 use App\Models\CustomerModel;
 use App\Core\View;
 use App\Core\Database;
@@ -8,7 +10,7 @@ use PDO;
 
 class CustomerController
 {
-    /* LOGIN */
+    
     public function loginForm()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -23,6 +25,40 @@ class CustomerController
         $email    = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
         $redirect = $_POST['redirect'] ?? null;
+
+        if (empty($email)) {
+        $viewData['error'] = "Email is required.";
+        require_once __DIR__ . '/../views/customer/login.php';
+        return;
+    }
+
+    // Password required
+    if (empty($password)) {
+        $viewData['error'] = "Password is required.";
+        require_once __DIR__ . '/../views/customer/login.php';
+        return;
+    }
+
+    // Email must be valid
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $viewData['error'] = "Please enter a valid email address.";
+        require_once __DIR__ . '/../views/customer/login.php';
+        return;
+    }
+
+    // Password must contain a special character
+    if (!preg_match('/[!@#$%^&*(),.?":{}|<>_\-+=]/', $password)) {
+        $viewData['error'] = "Password must include at least one special character.";
+        require_once __DIR__ . '/../views/customer/login.php';
+        return;
+    }
+
+    // Password must be max 8 characters
+    if (strlen($password) > 8) {
+        $viewData['error'] = "Password cannot be longer than 8 characters.";
+        require_once __DIR__ . '/../views/customer/login.php';
+        return;
+    }
 
         $customer = CustomerModel::findByEmail($email);
 
@@ -53,30 +89,64 @@ class CustomerController
         exit;
     }
 
-    /*
-       SIGNUP
-   */
+    
     public function signupForm()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
         require_once __DIR__ . '/../views/customer/signup.php'; 
-        // make sure your file is renamed to signup.php
+        
     }
 
     public function signup()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
-        $name     = $_POST['name'] ?? '';
-        $email    = $_POST['email'] ?? '';
+        $name     = trim($_POST['name'] ?? '');
+        $email    = trim($_POST['email'] ?? '');
         $password = $_POST['password'] ?? '';
         $confirm  = $_POST['confirm_password'] ?? '';
+        $consent  = $_POST['consent'] ?? null;
+
+        if (!preg_match("/^[a-zA-ZæøåÆØÅ ]+$/u", $name)) {
+        $viewData['error'] = "Name can only contain letters and spaces.";
+        require_once __DIR__ . '/../views/customer/signup.php';
+        return;
+    }
+
+    
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $viewData['error'] = "Please enter a valid email.";
+        require_once __DIR__ . '/../views/customer/signup.php';
+        return;
+    }
+
+    
+    if (!preg_match('/[!@#$%^&*(),.?":{}|<>_\-+=]/', $password)) {
+        $viewData['error'] = "Password must include at least one special character.";
+        require_once __DIR__ . '/../views/customer/signup.php';
+        return;
+    }
+
+    
+    if (strlen($password) > 8) {
+        $viewData['error'] = "Password cannot be longer than 8 characters.";
+        require_once __DIR__ . '/../views/customer/signup.php';
+        return;
+    }
+
+
 
         if ($password !== $confirm) {
             $viewData['error'] = "Passwords do not match.";
             require_once __DIR__ . '/../views/customer/signup.php';
             return;
         }
+
+        if (!$consent) {
+        $viewData['error'] = "You must consent to create an account.";
+        require_once __DIR__ . '/../views/customer/signup.php';
+        return;
+    }
 
         if (CustomerModel::emailExists($email)) {
             $viewData['error'] = "Email already exists.";
@@ -103,9 +173,7 @@ class CustomerController
         exit;
     }
 
-    /* 
-       DASHBOARD
-  */
+    
     public function dashboard()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -116,9 +184,7 @@ class CustomerController
         require_once __DIR__ . '/../views/customer/dashboard.php';
     }
 
-    /* 
-       CATEGORY + MENU
-  */
+    
     public function chooseCategory()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -127,9 +193,14 @@ class CustomerController
 
     public function menuPage()
     {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        require_once __DIR__ . '/../views/customer/menu.php';
-    }
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
+    $menuModel = new \App\Models\MenuModel();
+    $items = $menuModel->getAll(); // only published items
+
+    // Make $items available to the view
+    require __DIR__ . '/../views/customer/menu.php';
+}
 
     public function addToCart()
 {
@@ -180,7 +251,7 @@ public function addDealToCart()
 
     $dealId = (int)($_POST['deal_id'] ?? 0);
 
-    // HARD-CODED DEALS
+    
     $deals = [
         9001 => [
             "name" => "Shawarma Combo Deal",
@@ -248,7 +319,7 @@ public function loadCart()
         $lineTotal = $item['price'] * $qty;
         $total += $lineTotal;
 
-        // IMPORTANT → use HEREDOC for clean output
+        
         $html .= <<<HTML
         <div class="cart-page-item">
             <div class="info">
@@ -308,9 +379,7 @@ public function removeFromCart()
 
     echo json_encode(["success" => true]);
 }
-    /* 
-       CHECKOUT
-    */
+    
     public function orderStart()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -392,9 +461,7 @@ public function checkout()
         'total' => $total
     ]);
 }
-    /* 
-       ORDER HISTORY + RECEIPT
-    */
+    
     public function orderHistory()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -490,7 +557,7 @@ public function trackOrderPage()
 {
     if (session_status() === PHP_SESSION_NONE) session_start();
 
-    // Must be logged in
+    
     if (!isset($_SESSION['customer_id'])) {
         header("Location: /quick_serve/customer/login");
         exit;
@@ -501,9 +568,7 @@ public function trackOrderPage()
 
 
 
- /* 
-       SETTINGS
-  */
+
     public function settingsPage()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -512,22 +577,61 @@ public function trackOrderPage()
 
     public function update_profile()
     {
-        if (session_status() === PHP_SESSION_NONE) session_start();
+       if (session_status() === PHP_SESSION_NONE) session_start();
 
-        $pdo = Database::connect();
-        $stmt = $pdo->prepare("UPDATE customer SET name=?, email=?, address=? WHERE customer_id=?");
-        $stmt->execute([
-            $_POST['name'],
-            $_POST['email'],
-            $_POST['address'],
-            $_SESSION['customer_id']
-        ]);
+    $customerId = $_SESSION['customer_id'];
 
-        $_SESSION['customer_name'] = $_POST['name'];
+    
+    $name    = trim($_POST['name'] ?? '');
+    $email   = trim($_POST['email'] ?? '');
+    $address = trim($_POST['address'] ?? '');
 
+    
+    if (!preg_match("/^[a-zA-ZæøåÆØÅ ]+$/u", $name)) {
+        $_SESSION['flash_message'] = "Name can only contain letters and spaces.";
+        $_SESSION['flash_type'] = "error";
         header("Location: /quick_serve/customer/settings");
         exit;
     }
+
+    if (empty($email)) {
+        $_SESSION['flash_message'] = "Email cannot be empty.";
+        $_SESSION['flash_type'] = "error";
+        header("Location: /quick_serve/customer/settings");
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['flash_message'] = "Invalid email format.";
+        $_SESSION['flash_type'] = "error";
+        header("Location: /quick_serve/customer/settings");
+        exit;
+    }
+
+    $pdo = Database::connect();
+    $check = $pdo->prepare("SELECT customer_id FROM customer WHERE email = ? AND customer_id != ?");
+    $check->execute([$email, $customerId]);
+
+    if ($check->fetch()) {
+        $_SESSION['flash_message'] = "This email is already used by another account.";
+        $_SESSION['flash_type'] = "error";
+        header("Location: /quick_serve/customer/settings");
+        exit;
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE customer SET name=?, email=?, address=? WHERE customer_id=?");
+    $stmt->execute([$name, $email, $address, $customerId]);
+
+    
+    $_SESSION['customer_name'] = $name;
+
+    $_SESSION['flash_message'] = "Profile updated successfully!";
+    $_SESSION['flash_type'] = "success";
+
+    header("Location: /quick_serve/customer/settings");
+    exit;
+} 
 
     public function change_password()
     {
@@ -540,9 +644,24 @@ public function trackOrderPage()
 
         if ($new !== $confirm) {
             $_SESSION['flash_message'] = "New passwords do not match.";
+            $_SESSION['flash_type'] = "error";
             header("Location: /quick_serve/customer/settings");
             exit;
         }
+        if (!preg_match('/[!@#$%^&*(),.?":{}|<>_\-+=]/', $new)) {
+        $_SESSION['flash_message'] = "Password must contain at least one special character.";
+        $_SESSION['flash_type'] = "error";
+        header("Location: /quick_serve/customer/settings");
+        exit;
+    }
+
+    
+    if (strlen($new) > 8) {
+        $_SESSION['flash_message'] = "Password cannot be longer than 8 characters.";
+        $_SESSION['flash_type'] = "error";
+        header("Location: /quick_serve/customer/settings");
+        exit;
+    }
 
         $stmt = $pdo->prepare("SELECT password_hash FROM customer WHERE customer_id=?");
         $stmt->execute([$_SESSION['customer_id']]);
@@ -559,13 +678,14 @@ public function trackOrderPage()
         $pdo->prepare("UPDATE customer SET password_hash=? WHERE customer_id=?")
             ->execute([$hash, $_SESSION['customer_id']]);
 
+            $_SESSION['flash_message'] = "Password updated successfully!";
+            $_SESSION['flash_type'] = "success";
+
         header("Location: /quick_serve/customer/settings");
         exit;
     }
 
-    /*
-       AVATAR UPDATE
-  */
+    
     public function updateAvatar()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -602,9 +722,7 @@ public function trackOrderPage()
         exit;
     }
 
-    /*
-       DELETE ACCOUNT (FINAL VERSION B)
-     */
+    
     public function delete_account()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -664,45 +782,5 @@ public function trackOrderPage()
         header("Location: /quick_serve/customer/login?deleted=1");
         exit;
     }
-
-    /*
-       FEEDBACK
-    */
-    public function feedbackForm()
-    {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        require_once __DIR__ . '/../views/customer/feedback.php';
-    }
-
-    public function submitFeedback()
-    {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-
-        $customerId = $_SESSION['customer_id'];
-        $name       = $_SESSION['customer_name'];
-        $msg        = trim($_POST['message']);
-        $rating     = $_POST['rating'];
-
-        if ($msg === '') {
-            header("Location: /quick_serve/customer/feedback?error=1");
-            exit;
-        }
-
-        $dir = __DIR__ . '/../../storage/feedback';
-        if (!is_dir($dir)) mkdir($dir, 0777, true);
-
-        $line = json_encode([
-            'time'         => date('Y-m-d H:i:s'),
-            'customer_id'  => $customerId,
-            'name'         => $name,
-            'rating'       => $rating,
-            'message'      => $msg
-        ]) . PHP_EOL;
-
-        file_put_contents($dir . '/feedback.log', $line, FILE_APPEND);
-
-        header("Location: /quick_serve/customer/feedback?success=1");
-        exit;
-    }
 }
-?>
+
