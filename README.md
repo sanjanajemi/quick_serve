@@ -61,7 +61,7 @@ This project was designed to simulate a real-world restaurant workflow with
 ##  Project Setup
 
 1. **Copy project folder**  
-   Paste the folder `quick_serve` into your `htdocs/` directory.
+   Paste the folder `quick_serve` into your `htdocs/` directory. If you are downloading from github remove the 'main' from project name.
 
 2. **Open in IDE**  
    Open the folder 'quick_serve' in VS Code or your preferred IDE.
